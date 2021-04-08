@@ -6,7 +6,8 @@ const teamSchema = new Schema({
     name: { type: String, required: true, unique: true },
     category: { type: String, required: true },
     description: { type: String },
-    userCount: { type: Number },
+    userCount: { type: Number }, 
+    // members: change this into an array of objectIds(userIds)
     resourceCount: { type: Number },
 }, { timestamps: true });
 

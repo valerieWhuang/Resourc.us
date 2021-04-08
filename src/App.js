@@ -20,7 +20,6 @@ import ResourceCard from "./components/ResourceCard"
 function App() {
   const location = useLocation().pathname;
   const [button, setButton] = useState(<Link to='/CreateResource' className="btn btn-success">Create Resource</Link>);
-  
 
   useLayoutEffect(() => {
 		if (location === '/teams') {

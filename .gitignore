@@ -7,6 +7,10 @@ node_modules/
 *.log
 package-lock.json
 
+# Credentials
+.env
+apiKeys.js
+
 # OS generated files
 .DS_Store
 .DS_Store?
