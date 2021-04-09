@@ -15,6 +15,8 @@ import Navbars from "./components/Navbar";
 import CreateTeam from "./components/CreateTeam";
 import CreateResource from "./components/CreateResource";
 import ResourceCard from "./components/ResourceCard"
+import { GoogleLogout } from "react-google-login";
+import { apiKeys } from './apiKeys';
 
 
 function App() {
@@ -41,6 +43,14 @@ function App() {
           <li className="primary-action">{button}</li>
           <li><Link to='/login'>Login</Link></li>
           <li><Link to='/signup'>Signup</Link></li>
+          <li> 
+            <GoogleLogout
+              clientId={apiKeys.GOOGLE_OAUTH_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={() => console.log('logged out')}
+            >
+            </GoogleLogout>
+          </li>
         </ul>
         </header>
         <Route path="/" exact>{<Home></Home>}</Route>

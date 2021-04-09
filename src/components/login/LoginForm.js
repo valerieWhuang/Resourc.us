@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
+import { apiKeys } from '../../apiKeys'
 
 export const LoginForm = () => {
   const [values, setValues] = useState({
@@ -42,19 +44,51 @@ export const LoginForm = () => {
     console.log(values);
   }
 
+  const googleOnFailure = (res) => console.log(res);
+  
+  const googleOnSuccess = (res) => {
+    console.log(res);
+    history.push("/")
+  }
+
   return (
+    <>
+      <GoogleLogin
+        clientId={apiKeys.GOOGLE_OAUTH_CLIENT_ID}
+        buttonText="Login with Google"
+        onSuccess={googleOnSuccess}
+        onFailure={googleOnFailure}
+        cookiePolicy={'single_host_origin'}
+      />
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <input className="form-control" type="email" placeholder="email" id="email" ref={register} onChange={handleChange} />
+          <input
+            className="form-control"
+            type="email"
+            placeholder="email"
+            id="email"
+            ref={register}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="form-group">
-          <input type="password" className="form-control" placeholder="password" id="password" ref={register} onChange={handleChange} />
+          <input
+            type="password"
+            className="form-control"
+            placeholder="password"
+            id="password"
+            ref={register}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="form-group">
-          <button type="submit" className="btn btn-primary">Log In</button>
+          <button type="submit" className="btn btn-primary">
+            Log In
+          </button>
         </div>
       </form>
-  )
+    </>
+  );
 }
