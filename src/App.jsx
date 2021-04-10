@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react';
-
+import { hot } from 'react-hot-loader';
 // import router
 import { Route, Link, useLocation } from 'react-router-dom';
 
@@ -39,6 +39,8 @@ function App() {
     });
   };
 
+  console.log("User is logged in", user.isLoggedIn);
+
   return (
     <div className="outerContainer">
       <Navbars />
@@ -48,7 +50,7 @@ function App() {
             <li className="primary-action">{button}</li>
             { user.isLoggedIn ? (
               <li>
-                <button type="button" onClick={userLogout}>Logout</button>
+                Logout
               </li>
             ) : (
               <div className="login-signup-buttons">
@@ -70,4 +72,5 @@ function App() {
     </div>
   );
 }
-export default App;
+
+export default hot(module)(App);

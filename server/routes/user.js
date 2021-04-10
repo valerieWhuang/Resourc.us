@@ -1,9 +1,9 @@
 const express = require('express');
-const userController = require('../controllers/userController');
+const usersController = require('../controllers/usersController');
 const router = express.Router();
 
 router.post('/login',
-    userController.validateUser,
+    usersController.validateUser,
     (req, res) => {
         console.log('login User router is working');
         res.status(200).json({});
@@ -11,7 +11,7 @@ router.post('/login',
 );
 
 router.post('/',
-    userController.createUser,
+    usersController.createUser,
     (req, res) => {
         console.log('login User router is working');
         console.log(res.locals.response);

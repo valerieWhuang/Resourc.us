@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const url = process.env.MONGO_CONNECTION_STRING;
+mongoose.pluralize(null);
 
-mongoose.connect(url, {
+mongoose.connect(process.env.MONGO_CONNECTION_STRING, {
     // options for the connect method to parse the URI
     useNewUrlParser: true,
-
-    useUnifiedTopology: true
-
+    useUnifiedTopology: true,
 })
     .then(() => console.log('Connected to Resourcus DB.'))
     .catch(err => console.log(err));

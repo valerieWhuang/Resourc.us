@@ -12,8 +12,12 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
+        loader: "babel-loader",
         exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['react-hot-loader/babel']
+        }
       },
       {
         test: /\.css$/,
@@ -55,6 +59,7 @@ const config = {
   ],
   devServer: {
     contentBase: "./dist",
+    hot: true,
   },
 };
 
