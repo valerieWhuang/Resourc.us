@@ -1,41 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import axios from "axios";
 
 function createTeam() {
-  //state
   const [_payload, setPayload] = useState({
-    name: "",
-    image: "",
-    description: "",
-    category: "",
+    name: '',
+    image: '',
+    description: '',
+    category: '',
   });
 
   function handleChange(event) {
-    const { name, value } = event.target; //event target is each indivisual form that is being inputed
+    // event target is each indivisual form that is being inputed
+    const { name, value } = event.target;
 
-    setPayload({ ..._payload, [name]: value }); // copies previous state and updates only changed key/values
+    // copies previous state and updates only changed key/values
+    setPayload({ ..._payload, [name]: value });
   }
   function handleClick(event) {
     event.preventDefault();
-    //test if server is working
+    // test if server is working
+    // eslint-disable-next-line no-console
     console.log(_payload);
     // POST the payload to database
-    fetch("http://localhost:3000/teams/create", {
-      method: "POST",
+    fetch('http://localhost:3000/teams/create', {
+      method: 'POST',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(_payload)
+      body: JSON.stringify(_payload),
     })
-      .then((response) => {
-        return response.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
+        // eslint-disable-next-line no-console
         console.log(data);
       })
       .catch((err) => {
-        console.log("Post Fail", err);
+        // eslint-disable-next-line no-console
+        console.log('Post Fail', err);
       });
     // ADD RESET STATE HERE AFTER SUMBIT
   }
@@ -49,10 +51,9 @@ function createTeam() {
             onChange={handleChange}
             name="name"
             value={_payload.name}
-            // value=
             className="form-control"
             placeholder="Team Name"
-          ></input>
+          />
         </div>
         <div className="form-group">
           <input
@@ -61,7 +62,7 @@ function createTeam() {
             value={_payload.image}
             className="form-control"
             placeholder="Avatar"
-          ></input>
+          />
         </div>
         <div className="form-group">
           <input
@@ -70,7 +71,7 @@ function createTeam() {
             value={_payload.description}
             className="form-control"
             placeholder="Description"
-          ></input>
+          />
         </div>
         <div className="form-group">
           <input
@@ -79,9 +80,9 @@ function createTeam() {
             value={_payload.category}
             className="form-control"
             placeholder="Category"
-          ></input>
+          />
         </div>
-        <button onClick={handleClick} className="btn btn-lg btn-info">
+        <button type="button" onClick={handleClick} className="btn btn-lg btn-info">
           Create Team
         </button>
       </form>
