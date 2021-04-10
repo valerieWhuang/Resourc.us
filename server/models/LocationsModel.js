@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const LocationsSchema = new Schema({
   city: {
     type: String,
@@ -14,7 +20,7 @@ const LocationsSchema = new Schema({
     type: String,
     required: true,
   },
-}, { timestamps: true });
+}, options);
 
-var Locations = mongoose.model('Locations', LocationsSchema);
+var Locations = mongoose.model('locations', LocationsSchema);
 module.exports = { Locations };

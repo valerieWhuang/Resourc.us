@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const CommentsSchema = new Schema({
   message: {
     type: String,
@@ -10,7 +16,7 @@ const CommentsSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'Users'
   },
-}, { timestamps: true });
+}, options);
 
-var Comments = mongoose.model('Comments', CommentsSchema);
+var Comments = mongoose.model('comments', CommentsSchema);
 module.exports = { Comments };

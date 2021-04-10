@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema({ // userSchema
@@ -30,10 +36,10 @@ const UsersSchema = new Schema({ // userSchema
     // required: [true, "can't be blank"], 
     // min: [8, 'Not enough characters'] 
   }
-}, { timestamps: true });
+}, options);
 
 const saltRounds = 10;
-userSchema.pre('save', function (next) {
+UsersSchema.pre('save', function (next) {
 	const user = this;
 	if (!user.isModified('hash')) return next();
 	bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -47,5 +53,5 @@ userSchema.pre('save', function (next) {
 });
 
 
-var Users = mongoose.model('Users', UsersSchema);
+var Users = mongoose.model('users', UsersSchema);
 module.exports = { Users };

@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const TeamsSchema = new Schema({ // teamSchema
   name: { 
     type: String, 
@@ -13,22 +19,22 @@ const TeamsSchema = new Schema({ // teamSchema
   }], // category: { type: String, required: true },
   description: { type: String },
   profilePic: { type: String }, // image
-  userList: [{
+  usersList: [{
     type: Schema.Types.ObjectId, 
     ref: 'Users'
   }],
-  userCount: { type: Number }, 
+  usersCount: { type: Number }, 
   resourcesList: [{
     type: Schema.Types.ObjectId, 
     ref: 'Resources'
   }],
-  resourceCount: { type: Number },
+  resourcesCount: { type: Number },
   adminsList: [{
     type: Schema.Types.ObjectId, 
     ref: 'Users'
   }]
-}, { timestamps: true });
+}, options);
 
 // var Team = mongoose.model('Team', teamSchema);
-var Teams = mongoose.model('Teams', TeamsSchema);
+var Teams = mongoose.model('teams', TeamsSchema);
 module.exports = { Teams };

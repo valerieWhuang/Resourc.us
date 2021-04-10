@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const SubCategoriesSchema = new Schema({
   name: {
     type: String, 
@@ -12,7 +18,7 @@ const SubCategoriesSchema = new Schema({
     required: true,
     default: 0 
   }
-}, { timestamps: true });
+}, options);
 
-var SubCategories = mongoose.model('SubCategories', SubCategoriesSchema);
+var SubCategories = mongoose.model('subCategories', SubCategoriesSchema);
 module.exports = { SubCategories };

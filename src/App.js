@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-
+import {hot} from "react-hot-loader";
 // import router
 import { Route, Link, useLocation } from "react-router-dom";
 
@@ -54,7 +54,7 @@ function App() {
     </div>
   );
 }
-export default App;
+export default hot(module)(App);
 
 
 // Other Routes

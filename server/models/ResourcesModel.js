@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const ResourcesSchema = new Schema({ // resourceSchema
   title: { 
     type: String, 
@@ -39,7 +45,7 @@ const ResourcesSchema = new Schema({ // resourceSchema
     type: Schema.Types.ObjectId, 
     ref: 'Locations'
   }
-}, { timestamps: true });
+}, options);
 
-var Resources = mongoose.model('Resources', ResourcesSchema);
+var Resources = mongoose.model('resources', ResourcesSchema);
 module.exports = { Resources };

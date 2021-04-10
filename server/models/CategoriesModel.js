@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
+
 const CategoriesSchema = new Schema({
   name: {
     type: String, 
@@ -12,7 +18,7 @@ const CategoriesSchema = new Schema({
     required: true,
     default: 0 
   }
-}, { timestamps: true });
+}, options);
 
-var Categories = mongoose.model('Categories', CategoriesSchema);
+var Categories = mongoose.model('categories', CategoriesSchema);
 module.exports = { Categories };

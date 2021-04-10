@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-// testing
 
-console.log(process.env.MONGO_CONNECTION_STRING);
+mongoose.pluralize(null);
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING, {
     // options for the connect method to parse the URI
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    // dbName: "ResourcUs"
 })
     .then(() => console.log('Connected to Resourcus DB.'))
     .catch(err => console.log(err));
