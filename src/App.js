@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-
+import {hot} from "react-hot-loader";
 // import router
 import { Route, Link, useLocation } from "react-router-dom";
 
@@ -22,7 +22,6 @@ import { apiKeys } from './apiKeys';
 function App() {
   const location = useLocation().pathname;
   const [button, setButton] = useState(<Link to='/CreateResource' className="btn btn-success">Create Resource</Link>);
-  
 
   useLayoutEffect(() => {
 		if (location === '/teams') {
@@ -65,7 +64,7 @@ function App() {
     </div>
   );
 }
-export default App;
+export default hot(module)(App);
 
 
 // Other Routes

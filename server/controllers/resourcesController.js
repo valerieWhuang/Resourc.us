@@ -1,97 +1,103 @@
-const { Resource } = require('../models/resourceModel');
-const resourceController = {};
+const { Resources } = require('../models/ResourcesModel');
+const resourcesController = {};
 
-resourceController.createResource = (req, res, next) => {
+resourcesController.createResource = (req, res, next) => {
     const requestBody = req.body;
 
-    Resource.create({
+    Resources.create({
+        title: requestBody.title,
+        description: requestBody.description,
         link: requestBody.link,
-        teamId: requestBody.teamId,
-        category: requestBody.category
+        team: requestBody.team,
+        votes: 0,
+        subCategories: requestBody.subCategories,
+        commentsList: [],
+        postedBy: requestBody.postedBy,
+        relatedLocation: requestBody.relatedLocation,
     })
         .then(data => {
             res.locals.response = data;
-            console.log('resourceController.createResource:', 'resource created')
+            console.log('resourcesController.createResource:', 'resource created')
             next();
         })
         .catch(err => {
             next({
-                log: `Create Resource - ERROR: ${err}`,
+                log: `Create Resources - ERROR: ${err}`,
                 message: {
-                    err: 'Error occured in resourceController.createResource',
+                    err: 'Error occured in resourcesController.createResource',
                     message: err
                 }
             })
         });
 }
 
-resourceController.listResources = (req, res, next) => {
+resourcesController.listResources = (req, res, next) => {
     const requestBody = req.body;
 
-    Resource.find({
-        teamId: requestBody.teamId,
+    Resources.find({
+        team: requestBody.team,
     })
         .then(data => {
             res.locals.response = data;
-            console.log('resourceController.listResources:', 'resources listed')
+            console.log('resourcesController.listResources:', 'resources listed')
             next();
         })
         .catch(err => {
             next({
                 log: `List Resources - ERROR: ${err}`,
                 message: {
-                    err: 'Error occured in resourceController.listResources',
+                    err: 'Error occured in resourcesController.listResources',
                     message: err
                 }
             })
         });
 }
 
-resourceController.listThreeResources = (req, res, next) => {
+resourcesController.listThreeResources = (req, res, next) => {
     const requestBody = req.body;
 
-    Resource.find({
-        teamId: requestBody.teamId,
+    Resources.find({
+        team: requestBody.team,
     }, null, { limit: 3 })
         .then(data => {
             res.locals.response = data;
-            console.log('resourceController.listThreeResources:', '3 resources listed')
+            console.log('resourcesController.listThreeResources:', '3 resources listed')
             next();
         })
         .catch(err => {
             next({
                 log: `List 3 Resources - ERROR: ${err}`,
                 message: {
-                    err: 'Error occured in resourceController.listThreeResources',
+                    err: 'Error occured in resourcesController.listThreeResources',
                     message: err
                 }
             })
         });
 }
 
-resourceController.listAllResources = (req, res, next) => {
-    Resource.find({})
+resourcesController.listAllResources = (req, res, next) => {
+    Resources.find({})
         .then(data => {
             res.locals.response = data;
-            console.log('resourceController.listAllResources:', 'all resources listed')
+            console.log('resourcesController.listAllResources:', 'all resources listed')
             next();
         })
         .catch(err => {
             next({
                 log: `List All Resources - ERROR: ${err}`,
                 message: {
-                    err: 'Error occured in resourceController.listAllResources',
+                    err: 'Error occured in resourcesController.listAllResources',
                     message: err
                 }
             })
         });
 }
 
-resourceController.upvoteResource = (req, res, next) => {
+resourcesController.upvoteResource = (req, res, next) => {
     const requestBody = req.body;
     const numVotes = requestBody.upvote ? 1 : -1;
 
-    Resource.findOneAndUpdate({
+    Resources.findOneAndUpdate({
         // link: requestBody.link,
         // teamId: requestBody._id,
         _id: requestBody._id,
@@ -103,18 +109,18 @@ resourceController.upvoteResource = (req, res, next) => {
         })
         .then(data => {
             res.locals.response = data;
-            console.log('resourceController.upvoteResource:', 'resource upvoted')
+            console.log('resourcesController.upvoteResource:', 'resource upvoted')
             next();
         })
         .catch(err => {
             next({
-                log: `Upvote Resource - ERROR: ${err}`,
+                log: `Upvote Resources - ERROR: ${err}`,
                 message: {
-                    err: 'Error occured in resourceController.upvoteResource',
+                    err: 'Error occured in resourcesController.upvoteResource',
                     message: err
                 }
             })
         });
 }
 
-module.exports = resourceController;
+module.exports = resourcesController;

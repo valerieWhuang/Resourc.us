@@ -1,9 +1,9 @@
 const express = require('express');
-const teamController = require('../controllers/teamController');
+const teamsController = require('../controllers/teamsController');
 const router = express.Router();
 
 router.get('/list',
-    teamController.listTeams,
+    teamsController.listTeams,
     (req, res) => {
         console.log('list teams router is working');
         res.status(200).json(res.locals.response);
@@ -11,7 +11,7 @@ router.get('/list',
 );
 
 router.get('/list/:id',
-    teamController.findTeam,
+    teamsController.findTeam,
     (req, res) => {
         console.log('find teams router is working');
         res.status(200).json(res.locals.response);
@@ -19,7 +19,7 @@ router.get('/list/:id',
 );
 
 router.get('/listThree',
-    teamController.listThreeTeams,
+    teamsController.listThreeTeams,
     (req, res) => {
         console.log('list 3 teams router is working');
         res.status(200).json(res.locals.response);
@@ -27,7 +27,7 @@ router.get('/listThree',
 );
 
 router.post('/create',
-    teamController.createTeam,
+    teamsController.createTeam,
     (req, res) => {
         console.log('create team router is working');
         console.log(res.locals.response);
