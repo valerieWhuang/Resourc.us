@@ -24,7 +24,7 @@ const UsersSchema = new Schema(
     emailAddress: {
       type: String,
       required: [true, "can't be blank"],
-      unique: true,
+      // unique: true,
       // index: true,
     }, // email
     googleId: {
@@ -42,7 +42,7 @@ const UsersSchema = new Schema(
       // min: [8, 'Not enough characters']
     },
   },
-  options
+  options,
 );
 
 UsersSchema.pre("save", async function (next) {

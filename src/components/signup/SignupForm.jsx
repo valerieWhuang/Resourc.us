@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../../StateProvider';
 
 const SignupForm = () => {
   const [values, setValues] = useState({
@@ -8,6 +9,7 @@ const SignupForm = () => {
     firstName: '',
     lastName: '',
   });
+  const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
 
   // 'data' is an object where the keys are the names of the form fields,
@@ -25,6 +27,19 @@ const SignupForm = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        dispatch({
+          type: 'AUTH_USER',
+          item: {
+            isLoggedIn: true,
+            firstName: res.firstName,
+            lastName: res.lastName,
+            emailAddress: res.emailAddress,
+            googleId: '',
+            teamsList: res.teamsList,
+            // eslint-disable-next-line no-underscore-dangle
+            id: res._id,
+          },
+        });
       })
       // eslint-disable-next-line no-unused-vars
       .then((res) => {

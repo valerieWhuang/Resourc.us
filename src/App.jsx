@@ -39,7 +39,7 @@ function App() {
     });
   };
 
-  console.log("User is logged in", user.isLoggedIn);
+  console.log("User is logged in", user.isLoggedIn, user);
 
   return (
     <div className="outerContainer">
@@ -50,7 +50,7 @@ function App() {
             <li className="primary-action">{button}</li>
             { user.isLoggedIn ? (
               <li>
-                Logout
+                <button type="button" onClick={userLogout}>Logout</button>
               </li>
             ) : (
               <div className="login-signup-buttons">

@@ -39,6 +39,7 @@ passport.use(
       passwordField: 'password',
     },
     async (emailAddress, password, done) => {
+      console.log("we made it this far in the log in!!", emailAddress, password);
       try {
         const user = await UsersModel.findOne({ emailAddress });
         if (!user) {
@@ -49,9 +50,10 @@ passport.use(
         if (!validate) {
           return done(null, false, { message: 'Wrong password!' });
         }
-
+        console.log(user);
         return done(null, user, { message: 'Logged in Successfully!' });
       } catch (error) {
+        console.log(error);
         return done(error);
       }
     },

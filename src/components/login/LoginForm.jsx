@@ -21,7 +21,6 @@ const LoginForm = () => {
     console.log(values);
     fetch('/user/login', {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
