@@ -24,6 +24,23 @@ commentsController.createComment = (req, res, next) => {
     });
 };
 
+commentsController.listAllComments = (req, res, next) => {
+  Comments.find({}) 
+    .then(data => {
+      res.locals.response = data;
+      console.log('commentsController.listAllComments:', 'all comments listed')
+      next();
+    })
+    .catch(err => {
+      next({
+        log: `List All Comments - ERROR: ${err}`,
+        message: {
+          err: 'Error occured in commentsController.listAllComments',
+          message: err
+        }
+      })
+    })
+}
 
 
 module.exports = commentsController;

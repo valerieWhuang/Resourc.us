@@ -12,5 +12,14 @@ router.post('/create',
   }
 );
 
+router.get('/list', 
+  commentsController.listAllComments,
+  (req, res) => {
+    console.log('list comments route is working');
+    console.log(res.locals.respose);
+    res.status(200).json(res.locals.response);
+  }
+)
+
 
 module.exports = router;
