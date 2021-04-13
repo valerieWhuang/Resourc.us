@@ -24,11 +24,18 @@ router.get('/list',
 router.post('/edit',
   commentsController.editComment,
   (req, res) => {
-    console.log('edit commentes route is working');
+    console.log('edit comments route is working');
     console.log(res.locals.response);
     res.status(200).json(res.locals.response);
   }
 )
+
+router.post('/delete', 
+  commentsController.deleteComment, (req, res) => {
+  console.log('delete comment route is working');
+  console.log(res.locals.response);
+  res.status(200).json(res.locals.response);
+});
 
 
 module.exports = router;

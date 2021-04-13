@@ -42,6 +42,7 @@ commentsController.listAllComments = (req, res, next) => {
     })
 }
 
+
 commentsController.editComment = (req, res, next) => {
   const requestBody = req.body;
   Comments.findOneAndUpdate({
@@ -66,6 +67,28 @@ commentsController.editComment = (req, res, next) => {
       });
     });
 };
+
+commentsController.deleteComment = (req, res, next) => {
+  const requestBody = req.body;
+  Comments.findByIdAndDelete({
+    _id: requestBody._id,
+  })
+    .then((data) => {
+      res.locals.response = data;
+      console.log('commentsController.deleteComment:', 'comment deleted');
+      next();
+    })
+    .catch((err) => {
+      next({
+        log: `Delete Comment - ERROR: ${err}`,
+        message: {
+          err: 'Error occured in commentsController.deleteComment',
+          message: err,
+        },
+      });
+    });
+};
+
 
 
 module.exports = commentsController;
