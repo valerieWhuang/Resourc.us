@@ -15,7 +15,7 @@ const SignupForm = () => {
   // eslint-disable-next-line no-unused-vars
   const onSubmit = (e) => {
     e.preventDefault();
-    fetch('/user/', {
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,6 +23,9 @@ const SignupForm = () => {
       body: JSON.stringify(values),
     })
       .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      })
       // eslint-disable-next-line no-unused-vars
       .then((res) => {
         // Enter something that stores or handles cookies or JWT
@@ -50,7 +53,7 @@ const SignupForm = () => {
       </div>
 
       <div className="form-group">
-        <input type="email" className="form-control" placeholder="email" id="email" name="emailAddress" value={values.emailAddress} onChange={handleChange} />
+        <input type="email" className="form-control" placeholder="email" id="emailAddress" name="emailAddress" value={values.emailAddress} onChange={handleChange} />
       </div>
 
       <div className="form-group">
