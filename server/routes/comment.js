@@ -16,7 +16,16 @@ router.get('/list',
   commentsController.listAllComments,
   (req, res) => {
     console.log('list comments route is working');
-    console.log(res.locals.respose);
+    console.log(res.locals.response);
+    res.status(200).json(res.locals.response);
+  }
+)
+
+router.post('/edit',
+  commentsController.editComment,
+  (req, res) => {
+    console.log('edit commentes route is working');
+    console.log(res.locals.response);
     res.status(200).json(res.locals.response);
   }
 )

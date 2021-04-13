@@ -42,5 +42,30 @@ commentsController.listAllComments = (req, res, next) => {
     })
 }
 
+commentsController.editComment = (req, res, next) => {
+  const requestBody = req.body;
+  Comments.findOneAndUpdate({
+    _id: requestBody._id,
+  }, {
+    message: requestBody.message,
+  }, {
+    returnNewDocument: true
+  })
+    .then((data) => {
+      res.locals.response = data;
+      console.log('commentsController.editComments:', 'comment edited');
+      next();
+    })
+    .catch((err) => {
+      next({
+        log: `Edit Comment - ERROR: ${err}`,
+        message: {
+          err: 'Error occured in commentsController.editComments',
+          message: err,
+        },
+      });
+    });
+};
+
 
 module.exports = commentsController;
