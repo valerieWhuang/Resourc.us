@@ -7,7 +7,7 @@ const options = {
   updatedAt: "updated_at"
 };
 
-const SubCategoriesSchema = new Schema({
+const TagsSchema = new Schema({
   name: {
     type: String, 
     required: true,
@@ -20,5 +20,5 @@ const SubCategoriesSchema = new Schema({
   }
 }, options);
 
-var SubCategories = mongoose.model('subCategories', SubCategoriesSchema);
-module.exports = { SubCategories };
+var Tags = mongoose.model('tags', TagsSchema);
+module.exports = { Tags };

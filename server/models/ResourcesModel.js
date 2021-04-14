@@ -29,9 +29,9 @@ const ResourcesSchema = new Schema({ // resourceSchema
     default: 0 
   },
   // category: { type: String, required: true }
-  subCategories: [{
+  tags: [{
     type: Schema.Types.ObjectId, 
-    ref: 'SubCategories'
+    ref: 'Tags'
   }],
   commentsList: [{
     type: Schema.Types.ObjectId, 

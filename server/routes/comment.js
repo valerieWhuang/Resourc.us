@@ -1,5 +1,4 @@
 const express = require('express');
-const { ModuleFilenameHelpers } = require('webpack');
 const commentsController = require('../controllers/commentsController');
 const router = express.Router();
 
