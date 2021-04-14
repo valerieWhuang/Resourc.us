@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className="outerContainer">
-      {user.isLoggedIn && <Navbars />}
+      {/* {user.isLoggedIn && <Navbars />} */}
       <div className="innerContainer">
         <header className="mainHeader">
           <ul>
