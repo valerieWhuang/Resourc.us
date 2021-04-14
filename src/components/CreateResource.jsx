@@ -4,14 +4,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 function createResource() {
+  const currentTeam = localStorage.getItem('currentTeam')
+  
   // State
   const [_payload, setPayload] = useState({
     title: "",
-    link: "",
     description: "",
-    category: "",
+    link: "",
+    team: currentTeam, // team is preselected if already on team page
     votes: 0,
+    tags: [],
+    commentsList: [],
+    postedBy: ""
   });
+
   const [_teams, setTeams] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/teams/list")
@@ -61,6 +67,7 @@ function createResource() {
     setPayload(payload);
     console.log(_payload);
   }
+  
   return (
     <div className='container formContainer'>
       <h1>Create Resource Page</h1>
@@ -99,19 +106,32 @@ function createResource() {
         <div className="form-group">
           <input
             onChange={handleChange}
-            name="category"
+            name="tags"
             autoComplete="off"
-            value={_payload.category}
+            value={_payload.tags}
             className="form-control"
-            placeholder="Category"
+            placeholder="Tags"
           ></input>
         </div>
 
-        <select onChange={selectTeam}>
+        {/* team is preselected if already on team page */}
+        {/* <div className="form-group">
+          <input
+            type="hidden"
+            onChange={handleChange}
+            name="team"
+            autoComplete="off"
+            value=""
+            className="form-control"
+            placeholder=""
+          ></input>
+        </div> */}
+
+        {/* <select onChange={selectTeam}>
           {_teams.map((team) => (
-            <option value={team._id}>{team.name}</option>
+            <option value={team._id} key={team._id}>{team.name}</option>
           ))}
-        </select>
+        </select> */}
 
         <button onClick={handleClick} className="btn btn-lg btn-info">
           Create Resource

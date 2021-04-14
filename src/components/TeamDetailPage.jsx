@@ -13,7 +13,9 @@ function TeamDetailPage({ match }) {
   const [teamResources, setTeamResources] = useState([]);
 
   useEffect(() => {
-    // TO DO LATER: change to use teamController.findTeam
+    // when team page is visited, set current team in localStorage
+    localStorage.setItem('currentTeam', id)
+
     // GET team details by ID
     fetch("http://localhost:3000/teams/list")
       .then(response => response.json())
