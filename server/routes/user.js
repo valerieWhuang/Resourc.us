@@ -1,22 +1,43 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
 const usersController = require('../controllers/usersController');
+
 const router = express.Router();
 
-router.post('/login',
-    usersController.validateUser,
-    (req, res) => {
-        console.log('login User router is working');
-        res.status(200).json({});
+// router.post('/signup', usersController.createUser,
+//   passport.authenticate('signup', { session: false }),
+//   async (req, res) => {
+//     console.log('login User router is working');
+//     res.status(200).json({ message: 'success', user: req.user });
+//   });
+
+router.post(
+  '/signup',
+  passport.authenticate('signup', { session: false }),
+  async (req, res, next) => {
+    try {
+      console.log('login User router is working');
+      res.status(200).json(req.user);
+    } catch (error) {
+      console.log(error);
     }
+  },
 );
 
-router.post('/',
-    usersController.createUser,
-    (req, res) => {
-        console.log('login User router is working');
-        console.log(res.locals.response);
-        res.status(200).json(res.locals.response);
+router.post(
+  '/login',
+  passport.authenticate('login', { session: false }),
+  async (req, res, next) => {
+    try {
+      console.log('login User router is working');
+      res.status(200).json(req.user);
+    } catch (error) {
+      console.log(error);
     }
+  },
 );
 
 module.exports = router;

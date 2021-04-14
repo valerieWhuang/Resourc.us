@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
 
+import { useUserContext } from '../StateProvider';
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
+  const { user } = useUserContext();
+  console.log(user);
 
   useEffect(() => {
-
-    fetch("http://localhost:3000/teams/list").then(response => {
+    fetch("http://localhost:3000/teams/list").then((response) => {
       return response.json(); //Parses to JSON
     }).then(data => {
       setTeams(data);
@@ -15,7 +17,7 @@ function Teams() {
     }).catch(err => {
       console.log('GET FAILED', err);
     })
-  }, [])
+  }, []);
 
   const colors = [
     ['#ff4b1f', '#ff9068'],
