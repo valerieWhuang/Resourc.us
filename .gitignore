@@ -7,6 +7,10 @@ node_modules/
 *.log
 package-lock.json
 
+# Credentials
+.env
+apiKeys.js
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -15,5 +19,7 @@ package-lock.json
 .Trashes
 ehthumbs.db
 Thumbs.db
+
 .env
-apikeys.js
+apiKeys.js
+

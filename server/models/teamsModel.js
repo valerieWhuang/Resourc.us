@@ -1,15 +1,40 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const teamSchema = new Schema({
-    image: { type: String },
-    name: { type: String, required: true, unique: true },
-    category: { type: String, required: true },
-    description: { type: String },
-    userCount: { type: Number },
-    resourceCount: { type: Number },
-}, { timestamps: true });
+const options = {
+  timestamps: true, 
+  createdAt: "created_at", 
+  updatedAt: "updated_at"
+};
 
-var Team = mongoose.model('Team', teamSchema);
+const TeamsSchema = new Schema({ // teamSchema
+  name: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  },
+  categoriesList: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Categories'
+  }], // category: { type: String, required: true },
+  description: { type: String },
+  profilePic: { type: String }, // image
+  usersList: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Users'
+  }],
+  usersCount: { type: Number }, 
+  resourcesList: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Resources'
+  }],
+  resourcesCount: { type: Number },
+  adminsList: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Users'
+  }]
+}, options);
 
-module.exports = { Team };
+// var Team = mongoose.model('Team', teamSchema);
+var Teams = mongoose.model('teams', TeamsSchema);
+module.exports = { Teams };

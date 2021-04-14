@@ -1,9 +1,9 @@
 const express = require('express');
-const resourceController = require('../controllers/resourceController');
+const resourcesController = require('../controllers/resourcesController');
 const router = express.Router();
 
 router.post('/create',
-    resourceController.createResource,
+    resourcesController.createResource,
     (req, res) => {
         console.log('create resource router is working');
         console.log(res.locals.response);
@@ -12,7 +12,7 @@ router.post('/create',
 );
 
 router.post('/list',
-    resourceController.listResources,
+    resourcesController.listResources,
     (req, res) => {
         console.log('list resources router is working');
         console.log(res.locals.response);
@@ -21,7 +21,7 @@ router.post('/list',
 );
 
 router.post('/listThree',
-    resourceController.listThreeResources,
+    resourcesController.listThreeResources,
     (req, res) => {
         console.log('list 3 resources router is working');
         console.log(res.locals.response);
@@ -30,7 +30,7 @@ router.post('/listThree',
 );
 
 router.get('/listAll',
-    resourceController.listAllResources,
+    resourcesController.listAllResources,
     (req, res) => {
         console.log('list all resources router is working');
         console.log(res.locals.response);
@@ -39,7 +39,7 @@ router.get('/listAll',
 );
 
 router.post('/upvote',
-    resourceController.upvoteResource,
+    resourcesController.upvoteResource,
     (req, res) => {
         console.log('upvote resource router is working');
         console.log(res.locals.response);
