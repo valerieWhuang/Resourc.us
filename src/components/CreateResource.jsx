@@ -5,6 +5,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 function createResource() {
   const currentTeam = localStorage.getItem('currentTeam')
+  const currentUser = localStorage.getItem('currentUser')
   
   // State
   const [_payload, setPayload] = useState({
@@ -15,7 +16,7 @@ function createResource() {
     votes: 0,
     tags: [],
     commentsList: [],
-    postedBy: ""
+    postedBy: currentUser // user is auto-populated if logged in
   });
 
   const [_teams, setTeams] = useState([]);
@@ -67,7 +68,7 @@ function createResource() {
     setPayload(payload);
     console.log(_payload);
   }
-  
+
   return (
     <div className='container formContainer'>
       <h1>Create Resource Page</h1>
