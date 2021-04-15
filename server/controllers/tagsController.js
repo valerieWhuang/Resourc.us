@@ -42,7 +42,7 @@ tagsController.listAllTags = (req, res, next) => {
     })
 }
 
-tagsController.incrementTagCount = async (req, res, next) => {
+tagsController.incrementTagCount = (req, res, next) => {
   console.log('inside tagsController.incrementTagCount:', res.locals.response)
   const tagIDs = res.locals.response.tags 
 
@@ -53,7 +53,7 @@ tagsController.incrementTagCount = async (req, res, next) => {
       records.forEach(record => {
         console.log('tag record: ', record)
         Tags.findByIdAndUpdate(record._id, {mentionCount: record.mentionCount + 1}, (err, result) => {
-          err ? res.send(err) : console.log('tag update result:', result)  
+          err ? res.send(err) : console.log('tag count update result:', result)  
         })
       })
       return next()
