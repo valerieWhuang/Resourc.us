@@ -38,9 +38,10 @@ function createResource() {
 
   // tag options
   const [ tagOptions, setTagOptions ] = useState([])
-  const [ newTagOption, setNewTagOption] = useState("")
+  const [ newTagOption, setNewTagOption] = useState([])
+  const [ selectedTags, setSelectedTags ] = useState([])
 
-  useEffect(() => {
+  function getTagsFromDB() {
     fetch("http://localhost:3000/tags/list")
       .then(response => response.json())
       .then( data => {
@@ -50,7 +51,17 @@ function createResource() {
       .catch( err => {
         console.log("FAILED TO GET TAG OPTIONS", err)
       })
+  }
+
+  // invoked when the component renders initially
+  useEffect(() => {
+    getTagsFromDB()
   }, [])
+
+  // invoked only when there is a change in selectedTags state
+  useEffect(() => {
+    getTagsFromDB()
+  }, [selectedTags])
 
   // during tag search, capture search query 
   function handleTagSearch() {
@@ -64,13 +75,24 @@ function createResource() {
   function createNewTag(e) {
     e.preventDefault()
     console.log('newTagOption:', newTagOption)
+    // NEW PLAN
+    // post to DB and create tag
+
+    // upon creation success, add tag to selectedTags state, 
+    // which will trigger Multiselect component to re-render and run useEffect()
+    setSelectedTags([ ...selectedTags, {mentionCount: 0, _id: "123", name: newTagOption}])
+
+    // add new tag ID to `selectedTagIDs`
   }
 
   function handleTagSelect(selectedList, selectedItem) {
+    setSelectedTags([ ...selectedTags, selectedItem])
     console.log(selectedList, 'selectedItem:', selectedItem)
   }
 
   function handleTagRemove(selectedList, removedItem) {
+    const updatedList = selectedTags.filter(tag => tag.name !== removedItem.name)
+    setSelectedTags(updatedList)
     console.log(selectedList, 'removedItem:', removedItem)
   }
 
@@ -151,9 +173,10 @@ function createResource() {
         {/* Tag Multiselect Component */}
         <Multiselect
           options={tagOptions} // Options to display in the dropdown
-          selectedValues="" // Preselected value to persist in dropdown
+          selectedValues={selectedTags} // Preselected value to persist in dropdown
           displayValue="name" // Property name to display in the dropdown options
-          onSearch={handleTagSearch}
+          keepSearchTerm={false}
+          onSearch={handleTagSearch} // Function will trigger on input change
           onSelect={handleTagSelect} // Function will trigger on select event
           onRemove={handleTagRemove} // Function will trigger on remove event
           emptyRecordMsg={<p>{newTagOption} <button onClick={createNewTag} className="btn btn-sm btn-primary">Create tag</button></p>}
