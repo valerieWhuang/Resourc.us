@@ -44,7 +44,7 @@ function createResource() {
   function getTagsFromDB() {
     fetch("http://localhost:3000/tags/list")
       .then(response => response.json())
-      .then( data => {
+      .then(data => {
         console.log('tag options', data)
         setTagOptions(data)
       })
@@ -75,14 +75,29 @@ function createResource() {
   function createNewTag(e) {
     e.preventDefault()
     console.log('newTagOption:', newTagOption)
-    // NEW PLAN
     // post to DB and create tag
+    fetch("http://localhost:3000/tags/create", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ "name": newTagOption, mentionCount: 0}),
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log('tag created data:', data);
 
-    // upon creation success, add tag to selectedTags state, 
-    // which will trigger Multiselect component to re-render and run useEffect()
-    setSelectedTags([ ...selectedTags, {mentionCount: 0, _id: "123", name: newTagOption}])
+      // clear input value after creating new tag
+      // document.getElementById('search_input').value = ""
 
-    // add new tag ID to `selectedTagIDs`
+      // upon creation success, add tag to selectedTags state, 
+      // which will trigger Multiselect component to re-render and run useEffect()
+      setSelectedTags([ ...selectedTags, data]) 
+    })
+    .catch((err) => {
+      console.log("POST Failed to create tag", err);
+    });
   }
 
   function handleTagSelect(selectedList, selectedItem) {
@@ -110,7 +125,7 @@ function createResource() {
     fetch("http://localhost:3000/resource/create", {
       method: "POST",
       headers: {
-        Accept: "application/json, text/plain, */*",
+        "Accept": "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(_payload),
@@ -149,16 +164,7 @@ function createResource() {
             placeholder="Title"
           ></input>
         </div>
-        <div className="form-group">
-          <input
-            onChange={handleChange}
-            name="link"
-            value={_payload.link}
-            autoComplete="off"
-            className="form-control"
-            placeholder="link"
-          ></input>
-        </div>
+
         <div className="form-group">
           <input
             onChange={handleChange}
@@ -170,8 +176,21 @@ function createResource() {
           ></input>
         </div>
 
+        <div className="form-group">
+          <input
+            onChange={handleChange}
+            name="link"
+            value={_payload.link}
+            autoComplete="off"
+            className="form-control"
+            placeholder="link"
+          ></input>
+        </div>
+        
         {/* Tag Multiselect Component */}
         <Multiselect
+          className="form-control"
+          placeholder="select tags"
           options={tagOptions} // Options to display in the dropdown
           selectedValues={selectedTags} // Preselected value to persist in dropdown
           displayValue="name" // Property name to display in the dropdown options
@@ -179,7 +198,7 @@ function createResource() {
           onSearch={handleTagSearch} // Function will trigger on input change
           onSelect={handleTagSelect} // Function will trigger on select event
           onRemove={handleTagRemove} // Function will trigger on remove event
-          emptyRecordMsg={<p>{newTagOption} <button onClick={createNewTag} className="btn btn-sm btn-primary">Create tag</button></p>}
+          emptyRecordMsg={<p>{newTagOption} <button onClick={createNewTag} className="btn btn-sm btn-primary">create tag</button></p>} // displays if the tag doesn't exist in DB
           closeIcon="circle"
         />
   
