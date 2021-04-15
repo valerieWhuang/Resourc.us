@@ -18,7 +18,7 @@ function createResource() {
     tags: [],
     commentsList: [],
     postedBy: currentUser, // user is auto-populated if logged in
-    relatedLocation: ""
+    relatedLocation: "606fb3c636dc0202b002d997"
   });
 
   const [_teams, setTeams] = useState([]);
@@ -120,7 +120,11 @@ function createResource() {
 
   function handleClick(event) {
     event.preventDefault();
-    //test if server is working
+
+    // update the tags array in resource payload
+    const tagIDs = selectedTags.map(tag => tag._id)
+    _payload['tags'] = tagIDs
+
     // POST the payload to database
     fetch("http://localhost:3000/resource/create", {
       method: "POST",
@@ -130,14 +134,12 @@ function createResource() {
       },
       body: JSON.stringify(_payload),
     })
-      .then((response) => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then((data) => {
-        console.log(data);
+        console.log('created resource:', data);
       })
       .catch((err) => {
-        console.log("Post Fail", err);
+        console.log("POST Failed to create resource", err);
       });
     // ADD RESET STATE HERE AFTER SUMBIT
   }
