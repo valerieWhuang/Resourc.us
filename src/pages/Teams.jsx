@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
 
 import { useUserContext } from '../StateProvider';
-import { SunBurstChart } from '../components/SunBurstChart';
+import { CategoriesNTagsSunBurst } from "../components/CategoriesNTagsSunBurst";
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
@@ -41,9 +41,7 @@ function Teams() {
   return (
     <>
       <div style={{ width: 400, height: 300 }}>
-        <SunBurstChart 
-          // data={data} 
-        />
+        <CategoriesNTagsSunBurst />
       </div>
       <div className="cardContainer">
         {_teams.map(team =>
