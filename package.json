@@ -14,7 +14,7 @@
     "start": "webpack serve --open --hot --mode development",
     "server": "nodemon server/server.js",
     "restart": "npm run build-dev && npm run server",
-    "dev": "npm run server && npm run start"
+    "dev": "npm run server & npm run start"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
