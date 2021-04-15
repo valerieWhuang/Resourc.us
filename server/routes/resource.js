@@ -1,9 +1,12 @@
 const express = require('express');
-const resourcesController = require('../controllers/resourcesController');
 const router = express.Router();
+
+const resourcesController = require('../controllers/resourcesController');
+const tagsController = require('../controllers/tagsController');
 
 router.post('/create',
     resourcesController.createResource,
+    tagsController.incrementTagCount,
     (req, res) => {
         console.log('create resource router is working');
         console.log(res.locals.response);
