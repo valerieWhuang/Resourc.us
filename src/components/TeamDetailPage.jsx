@@ -13,7 +13,9 @@ function TeamDetailPage({ match }) {
   const [teamResources, setTeamResources] = useState([]);
 
   useEffect(() => {
-    // TO DO LATER: change to use teamController.findTeam
+    // when team page is visited, set current team in localStorage
+    localStorage.setItem('currentTeam', id)
+
     // GET team details by ID
     fetch("http://localhost:3000/teams/list")
       .then(response => response.json())
@@ -28,8 +30,8 @@ function TeamDetailPage({ match }) {
         fetch("http://localhost:3000/resource/listAll")
           .then(response => response.json())
           .then(data => {
-            const currentResources = data.filter(r => r.teamId === id)
-            // console.log("resources: ", data)
+            // console.log('team detail:', id, "resources: ", data, "filtered data: ", data.filter(r => r.team === id))
+            const currentResources = data.filter(r => r.team === id)
             setTeamResources(currentResources)
           })
       })
@@ -39,7 +41,7 @@ function TeamDetailPage({ match }) {
   }, [])
 
   return (
-    <div class="container teamContainer">
+    <div className="container teamContainer">
       <div className="teamCard teamHero">{team.map(t => <div key={t._id}>
         <header>
           <div className="mask"></div>
@@ -53,6 +55,10 @@ function TeamDetailPage({ match }) {
         </section>
         
         <ResourceCard teamId={t._id}></ResourceCard>
+
+        {teamResources.map(resource => 
+          <p key={resource._id}>{resource.title}</p>
+        )}
       </div>)}</div>
     </div>
   );

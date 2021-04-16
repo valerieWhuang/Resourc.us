@@ -28,6 +28,10 @@ const LoginForm = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        // set current user in localStorage
+        localStorage.setItem('userIsLoggedIn', true)
+        localStorage.setItem('currentUser', res._id)
+
         dispatch({
           type: 'AUTH_USER',
           item: {
@@ -42,7 +46,7 @@ const LoginForm = () => {
         });
       })
       .then(() => {
-        // Enter something that stores or handles cookies or JWT
+        // redirect to home page
         history.push('/');
       })
       // eslint-disable-next-line no-console
