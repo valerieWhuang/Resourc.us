@@ -17,7 +17,6 @@ resourcesController.createResource = (req, res, next) => {
     })
         .then(data => {
             res.locals.response = data;
-            console.log('resourcesController.createResource:', 'resource created')
             next();
         })
         .catch(err => {
@@ -39,7 +38,6 @@ resourcesController.listResources = (req, res, next) => {
     })
         .then(data => {
             res.locals.response = data;
-            console.log('resourcesController.listResources:', 'resources listed')
             next();
         })
         .catch(err => {
@@ -61,7 +59,6 @@ resourcesController.listThreeResources = (req, res, next) => {
     }, null, { limit: 3 })
         .then(data => {
             res.locals.response = data;
-            console.log('resourcesController.listThreeResources:', '3 resources listed')
             next();
         })
         .catch(err => {
@@ -79,7 +76,6 @@ resourcesController.listAllResources = (req, res, next) => {
     Resources.find({})
         .then(data => {
             res.locals.response = data;
-            console.log('resourcesController.listAllResources:', 'all resources listed')
             next();
         })
         .catch(err => {
@@ -109,7 +105,6 @@ resourcesController.upvoteResource = (req, res, next) => {
         })
         .then(data => {
             res.locals.response = data;
-            console.log('resourcesController.upvoteResource:', 'resource upvoted')
             next();
         })
         .catch(err => {
