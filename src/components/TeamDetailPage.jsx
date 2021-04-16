@@ -30,8 +30,8 @@ function TeamDetailPage({ match }) {
         fetch("http://localhost:3000/resource/listAll")
           .then(response => response.json())
           .then(data => {
-            const currentResources = data.filter(r => r.teamId === id)
-            // console.log("resources: ", data)
+            // console.log('team detail:', id, "resources: ", data, "filtered data: ", data.filter(r => r.team === id))
+            const currentResources = data.filter(r => r.team === id)
             setTeamResources(currentResources)
           })
       })
@@ -55,6 +55,10 @@ function TeamDetailPage({ match }) {
         </section>
         
         <ResourceCard teamId={t._id}></ResourceCard>
+
+        {teamResources.map(resource => 
+          <p key={resource._id}>{resource.title}</p>
+        )}
       </div>)}</div>
     </div>
   );
