@@ -1,5 +1,11 @@
 @import './components/resets',
         './globals',
+
+        // new styles
+        'appstack/light.scss',
+        // 'appstack/_app.scss',
+
+        // old styles
         './components/container',
         './components/navbar',
         './components/mainHeader',
