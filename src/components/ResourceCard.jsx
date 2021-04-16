@@ -188,8 +188,8 @@ function ResourceCard({ teamId }) {
           <div className="votes">
             <div className="voteCount">{resource.votes}</div>
             <div className="actions">
-              <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} class='bx bxs-upvote'></i></button>
-              <button><i onClick={handleDownvote} votes={resource.votes} id={resource._id} class='bx bxs-downvote' ></i></button>
+              <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} className='bx bxs-upvote'></i></button>
+              <button><i onClick={handleDownvote} votes={resource.votes} id={resource._id} className='bx bxs-downvote' ></i></button>
             </div>
           </div>
           <div className="link">
