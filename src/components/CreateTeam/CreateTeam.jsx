@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import axios from "axios";
 
-function createTeam() {
+function CreateTeam() {
   const [_payload, setPayload] = useState({
     name: '',
     image: '',
@@ -90,4 +90,4 @@ function createTeam() {
   );
 }
 
-export default createTeam;
+export {CreateTeam};

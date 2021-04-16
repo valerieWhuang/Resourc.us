@@ -6,16 +6,14 @@ import { useUserContext } from '../StateProvider';
 function Teams() {
   const [_teams, setTeams] = useState([]);
   const { user } = useUserContext();
-  console.log(user);
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list").then((response) => {
       return response.json(); //Parses to JSON
     }).then(data => {
       setTeams(data);
-      // console.log(data); ENDLESS RUNNING BUG!?
     }).catch(err => {
-      console.log('GET FAILED', err);
+      console.error('GET FAILED', err);
     })
   }, []);
 
@@ -48,7 +46,8 @@ function Teams() {
           </header>
           <section>
             <div className="meta">
-              <div>{team.category}</div>
+              {console.log(team.categoriesList)}
+              <div>{team.categoriesList[0]?.name}</div>
               <div><i className='bx bx-merge'></i> 342</div>
               <div><i className='bx bxs-user-account'></i> 24</div>
             </div>
@@ -58,7 +57,6 @@ function Teams() {
             <div className="actions">
               <div>
                 <Link className="btn btn-default" to="/#">Join</Link>
-                {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
                 <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
               </div>
             </div>

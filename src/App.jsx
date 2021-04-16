@@ -8,13 +8,15 @@ import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import Teams from './pages/Teams';
-import TeamDetailPage from './components/TeamDetailPage';
 
 // import components
-import Navbars from './components/Navbar';
-import CreateTeam from './components/CreateTeam';
-import CreateResource from './components/CreateResource';
-import ResourceCard from './components/ResourceCard';
+import {
+  CreateResource,
+  ResourceCard,
+  CreateTeam,
+  TeamDetails,
+  NavBar,
+ } from './components';
 import { useStateValue } from './StateProvider';
 
 function App() {
@@ -52,8 +54,8 @@ function App() {
 
   return (
     <div className="outerContainer">
-      {/* {user.isLoggedIn && <Navbars />} */}
-      <Navbars />
+      {/* {user.isLoggedIn && <Navbar />} */}
+      <NavBar />
       <div className="innerContainer">
         <header className="mainHeader">
           <ul>
@@ -70,14 +72,14 @@ function App() {
             )}
           </ul>
         </header>
-        <Route path="/" exact><Home /></Route>
-        <Route path="/teams/:id" component={TeamDetailPage} />
+        <Route path="/home" exact component={Home} />
+        <Route path="/teams/:id" component={TeamDetails} />
         <Route path="/teams" exact component={Teams} />
-        <Route path="/CreateResource"><CreateResource /></Route>
-        <Route path="/CreateTeam"><CreateTeam /></Route>
-        <Route path="/signup"><SignupPage /></Route>
-        <Route path="/login"><LoginPage /></Route>
-        <Route path="/ResourceCard"><ResourceCard /></Route>
+        <Route path="/CreateResource" component={CreateResource} />
+        <Route path="/CreateTeam" component={CreateTeam} />
+        <Route path="/signup" component={SignupPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/resources" component={ResourceCard} />
       </div>
     </div>
   );

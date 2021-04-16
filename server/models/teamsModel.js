@@ -15,7 +15,7 @@ const TeamsSchema = new Schema({
   },
   categoriesList: [{
     type: Schema.Types.ObjectId, 
-    ref: 'Categories'
+    ref: 'categories'
   }],
   description: { type: String },
   profilePic: { type: String },

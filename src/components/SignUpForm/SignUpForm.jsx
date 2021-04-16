@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const [values, setValues] = useState({
     emailAddress: '',
     password: '',
@@ -82,4 +82,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export {SignUpForm};

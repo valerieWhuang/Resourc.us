@@ -32,6 +32,8 @@ teamsController.createTeam = (req, res, next) => {
 
 teamsController.listTeams = (req, res, next) => {
     Teams.find({})
+        .populate('categoriesList')
+        .exec()
         .then(data => {
             res.locals.response = data;
             next();

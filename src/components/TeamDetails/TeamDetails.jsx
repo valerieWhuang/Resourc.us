@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ResourceCard from "./ResourceCard"
+import {ResourceCard} from "../ResourceCard";
 // import { Link } from 'react-router-dom';
 
-function TeamDetailPage({ match }) {
+function TeamDetails({ match }) {
   // get the team ID from the URL params (destructure props.match.params)
   const { params: { id } } = match;
 
@@ -21,8 +21,6 @@ function TeamDetailPage({ match }) {
       .then(response => response.json())
       .then(data => {
         const team = data.filter(t => t._id === id)
-        // console.log('teams data:', data)
-        // console.log('individual team data:', team)
         setTeam(team)
       })
       .then(() => {
@@ -30,13 +28,12 @@ function TeamDetailPage({ match }) {
         fetch("http://localhost:3000/resource/listAll")
           .then(response => response.json())
           .then(data => {
-            // console.log('team detail:', id, "resources: ", data, "filtered data: ", data.filter(r => r.team === id))
             const currentResources = data.filter(r => r.team === id)
             setTeamResources(currentResources)
           })
       })
       .catch(err => {
-        console.log('GET FAILED', err);
+        console.error('GET FAILED', err);
       })
   }, [])
 
@@ -50,6 +47,7 @@ function TeamDetailPage({ match }) {
         <section>
         <div className="meta">
           <div>{t.category}</div>
+          {console.log(t)}
         </div>
         <article><p>{t.description}</p></article>  
         </section>
@@ -65,4 +63,4 @@ function TeamDetailPage({ match }) {
 }
 
 
-export default TeamDetailPage;
+export {TeamDetails};
