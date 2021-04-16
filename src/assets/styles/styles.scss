@@ -3,10 +3,20 @@
 
         // new styles
         'appstack/light.scss',
-        // 'appstack/_app.scss',
 
         // old styles
         './components/container',
         './components/navbar',
         './components/mainHeader',
         './components/teamCard';
+
+
+body > * {
+  font-size: 1.1rem;
+}
+
+.hamburger {
+  font-size: 2rem;
+  margin-top: 5px;
+}
+        
