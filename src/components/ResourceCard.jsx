@@ -10,6 +10,7 @@ function ResourceCard({ teamId }) {
   const [_resource, setResource] = useState([]);
   const [count, setCount] = useState(0);
   const [comments, setComments] = useState({});
+  const [fetchedComments, setFetchedComments] = useState([]);
   // const [_upvote, setUpvote] = useState({});
   const _payload = { "teamId": teamId }
   const [ { user } ] = useUserContext();
@@ -38,6 +39,26 @@ function ResourceCard({ teamId }) {
 
     console.log("TEAM ID in resource card: ", teamId)
   }, [count]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/comment/list', {
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) =>{
+        setFetchedComments(data)
+      })
+      .catch((err) => {
+        console.log("Get Fail", err)
+      })
+
+
+  }, [])
 
   //get resource id
   //get current resource vote
@@ -192,7 +213,8 @@ function ResourceCard({ teamId }) {
   //     });
   // }
     
-  
+  console.log(fetchedComments);
+
   return (
     <div className="container">
       {/* <h1>Resource Card</h1>
@@ -203,30 +225,49 @@ function ResourceCard({ teamId }) {
         <button onClick={handleDownvote}>Downvote</button>
       </div> */}
       {_resource.map((resource) => (
-        <div className="resourceCard" key={resource._id}>
-          <div className="votes">
-            <div className="voteCount">{resource.votes}</div>
-            <div className="actions">
-              {/* <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} className='bx bxs-upvote'></i></button>
+        <>
+          <div className="resourceCard" key={resource._id}>
+            <div className="votes">
+              <div className="voteCount">{resource.votes}</div>
+              <div className="actions">
+                {/* <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} className='bx bxs-upvote'></i></button>
               <button><i onClick={handleDownvote} votes={resource.votes} id={resource._id} className='bx bxs-downvote' ></i></button> */}
+              </div>
+            </div>
+            <div className="link">
+              <Link to={resource.link}>{resource.link}</Link>
+            </div>
+            <div>
+              {user.id && (
+                <form>
+                  Comments
+                  <input
+                    placeholder="Add comment"
+                    value={comments[resource._id]}
+                    onChange={(e) =>
+                      setComments({
+                        ...comments,
+                        [resource._id]: e.target.value,
+                      })
+                    }
+                  />
+                  <button onClick={(e) => handleSubmitComment(e, resource._id)}>
+                    comment
+                  </button>
+                </form>
+              )}
             </div>
           </div>
-          <div className="link">
-            <Link to={resource.link}>{resource.link}</Link>
-          </div>
           <div className="comments">
-            {user.id && <form>
-              Comments
-              <input 
-                placeholder="Add comment" 
-                value={comments[resource._id]} 
-                onChange={(e) => setComments({...comments, [resource._id]: e.target.value })}
-              />
-              <button onClick={(e) => handleSubmitComment(e, resource._id)}>comment</button>
-            </form>
-            }
+            {fetchedComments
+              .filter((fetchedComment) => {
+                return fetchedComment.resourceId === resource._id;
+              })
+              .map((filteredComment) => {
+                return <div>{`${filteredComment.message} posted by ${filteredComment.postedBy}`}</div>;
+              })}
           </div>
-        </div>
+        </>
       ))}
     </div>
   );
