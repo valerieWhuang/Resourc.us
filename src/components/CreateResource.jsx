@@ -18,7 +18,7 @@ function createResource() {
     tags: [],
     commentsList: [],
     postedBy: currentUser, // user is auto-populated if logged in
-    relatedLocation: "606fb3c636dc0202b002d997"
+    relatedLocation: "606fb3c636dc0202b002d997" // currently "anywhere" by default
   });
 
   const [_teams, setTeams] = useState([]);
@@ -137,6 +137,7 @@ function createResource() {
       .then(response => response.json())
       .then((data) => {
         console.log('created resource:', data);
+        // TO DO: redirect to team page
       })
       .catch((err) => {
         console.log("POST Failed to create resource", err);
