@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useUserContext } from '../StateProvider';
 
 // Route this page
 // Render resource
@@ -8,8 +9,10 @@ import { Link } from 'react-router-dom';
 function ResourceCard({ teamId }) {
   const [_resource, setResource] = useState([]);
   const [count, setCount] = useState(0);
+  const [comments, setComments] = useState({});
   // const [_upvote, setUpvote] = useState({});
   const _payload = { "teamId": teamId }
+  const [ { user } ] = useUserContext();
 
   useEffect(() => {
     console.log(_payload)
@@ -130,6 +133,23 @@ function ResourceCard({ teamId }) {
         console.log("Post Fail", err);
       });
   }
+
+  function handleSubmitComment(e, resourceId) {
+    e.preventDefault();
+    fetch('http://localhost:3000/comment/create', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: comments[resourceId],
+        postedBy: user.id,
+        resourceId
+      }),
+    });
+  }
+
   // function handleDownvote(event) {
 
   //   event.preventDefault();
@@ -171,6 +191,8 @@ function ResourceCard({ teamId }) {
   //       console.log("Post Fail", err);
   //     });
   // }
+    
+  
   return (
     <div className="container">
       {/* <h1>Resource Card</h1>
@@ -181,19 +203,30 @@ function ResourceCard({ teamId }) {
         <button onClick={handleDownvote}>Downvote</button>
       </div> */}
       {_resource.map((resource) => (
-        <div
-          className="resourceCard"
-          key={resource._id}
-        >
+        <div className="resourceCard" key={resource._id}>
           <div className="votes">
             <div className="voteCount">{resource.votes}</div>
             <div className="actions">
-              <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} class='bx bxs-upvote'></i></button>
-              <button><i onClick={handleDownvote} votes={resource.votes} id={resource._id} class='bx bxs-downvote' ></i></button>
+
+              <button><i onClick={handleUpvote}  votes={resource.votes} id={resource._id} className='bx bxs-upvote'></i></button>
+              <button><i onClick={handleDownvote} votes={resource.votes} id={resource._id} className='bx bxs-downvote' ></i></button>
+
             </div>
           </div>
           <div className="link">
             <Link to={resource.link}>{resource.link}</Link>
+          </div>
+          <div className="comments">
+            {user.id && <form>
+              Comments
+              <input 
+                placeholder="Add comment" 
+                value={comments[resource._id]} 
+                onChange={(e) => setComments({...comments, [resource._id]: e.target.value })}
+              />
+              <button onClick={(e) => handleSubmitComment(e, resource._id)}>comment</button>
+            </form>
+            }
           </div>
         </div>
       ))}
