@@ -9,6 +9,7 @@ import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import Teams from './pages/Teams';
 import TeamDetailPage from './components/TeamDetailPage';
+import TestPage from './test-UI-page';
 
 // import components
 import Navbars from './components/Navbar';
@@ -70,6 +71,7 @@ function App() {
             )}
           </ul>
         </header>
+        <Route path="/test-page" exact><TestPage /></Route>
         <Route path="/" exact><Home /></Route>
         <Route path="/teams/:id" component={TeamDetailPage} />
         <Route path="/teams" exact component={Teams} />
