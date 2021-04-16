@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
-import { CategoriesNTagsSunBurst } from "../components/CategoriesNTagsSunBurst";
+import { Container, Row, Col } from 'reactstrap';
+import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
+import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
@@ -36,9 +38,18 @@ function Teams() {
 
   return (
     <>
-      <div style={{ width: 400, height: 300 }}>
-        <CategoriesNTagsSunBurst />
-      </div>
+      <Container>
+        <Row>
+          <Col xs="6">
+            <div style={{ width: 400, height: 300 }}>
+              <CategoriesTagsSunBurst />
+            </div>
+          </Col>
+          <Col xs="6">
+            <PopularResourcesBarChart />
+          </Col>
+        </Row>
+      </Container>
       <div className="cardContainer">
         {_teams.map(team =>
           <div className="teamCard" key={team.name}>

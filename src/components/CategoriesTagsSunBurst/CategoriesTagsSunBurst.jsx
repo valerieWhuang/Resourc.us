@@ -3,7 +3,7 @@ import axios from 'axios';
 import { SunBurstChart } from '../SunBurstChart';
 import { getRandomNumberBetweenInclusive } from '../../utils';
 
-const CategoriesNTagsSunBurst = () => {
+const CategoriesTagsSunBurst = () => {
   const [sunBurstData, setSunBurstData] = useState({});
 
   const getCategoriesStats = async () => {
@@ -54,4 +54,4 @@ const CategoriesNTagsSunBurst = () => {
   );
 };
 
-export {CategoriesNTagsSunBurst};
+export {CategoriesTagsSunBurst};
