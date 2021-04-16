@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import avatar from './assets/img/avatar.jpg';
 
 function TestPage () {
@@ -10,17 +11,18 @@ function TestPage () {
 		
     <nav id="sidebar" className="sidebar">
 			<div className="sidebar-content js-simplebar">
-				<a className="sidebar-brand" href="index.html">
-          <i class='bx bx-bolt-circle'></i>
-          <span className="align-middle mr-3">Resourcus</span>
+				<a className="sidebar-brand" href="/">
+          <span className="align-middle mr-3"><i class='bx bx-bolt-circle'></i> Resourcus</span>
         </a>
 
 				<ul className="sidebar-nav">
-          <li className="sidebar-header"><i class='bx bx-home-heart' ></i> Home</li>
-          <li className="sidebar-header"><i class='bx bx-group' ></i> Teams</li>
+          <li className="sidebar-header">Home</li>
+          <li className="sidebar-header">Teams</li>
+          <li className="sidebar-header"><Link to='/'><i class='bx bx-home-heart' ></i> Home</Link></li>
+          <li className="sidebar-header"><Link to='/teams'><i class='bx bx-group' ></i> Teams</Link></li>
 
 					<li className="sidebar-item">
-						<a href="#" className="sidebar-link ">
+						<a href="/teams" className="sidebar-link ">
               <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">View All Teams</span>
             </a>
 					</li>
