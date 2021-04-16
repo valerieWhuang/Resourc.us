@@ -229,7 +229,7 @@ function ResourceCard({ teamId }) {
             <Link to={resource.link}>{resource.link}</Link>
           </div>
           <div className="comments">
-            <form>
+            {user.id && <form>
               Comments
               <input 
                 placeholder="Add comment" 
@@ -238,6 +238,7 @@ function ResourceCard({ teamId }) {
               />
               <button onClick={(e) => handleSubmitComment(e, resource._id)}>comment</button>
             </form>
+            }
           </div>
         </div>
       ))}

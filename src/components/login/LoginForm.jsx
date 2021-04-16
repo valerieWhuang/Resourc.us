@@ -35,7 +35,7 @@ const LoginForm = () => {
             firstName: res.firstName,
             lastName: res.lastName,
             emailAddress: res.emailAddress,
-            googlId: res.googleId,
+            googleId: res.googleId,
             teamList: res.teamList,
             id: res._id,
           },
