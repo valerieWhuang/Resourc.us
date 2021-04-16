@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SunBurstChart } from '../SunBurstChart';
-import {data as mockData} from "./mockData";
+import { getRandomNumberBetweenInclusive } from '../../utils';
 
 const CategoriesNTagsSunBurst = () => {
   const [sunBurstData, setSunBurstData] = useState({});
@@ -9,17 +9,30 @@ const CategoriesNTagsSunBurst = () => {
   const getCategoriesStats = async () => {
     try {
       const {data} = await axios.get("http://localhost:3000/categories/list");
-      console.log(data);
       const obj = {
         name: "Categories & Tags",
         color: "hsl(57, 70%, 50%)",
         children: [],
       };
-      data.forEach(({mentionCount, name}) => {
+      const colorsPicked = [];
+      data.forEach(({mentionCount, name, tags}) => {
+        let currentParentColor = getRandomNumberBetweenInclusive(0, 360);
+        while(colorsPicked.includes(currentParentColor)) {
+          currentParentColor = getRandomNumberBetweenInclusive(0, 360);
+        }
+        colorsPicked.push(currentParentColor);
         obj.children.push({
           name,
-          color: "hsl(294, 70%, 50%)", // Replace this color values with random generated color that matches the team background color
-          loc: mentionCount,
+          color: `hsl(${currentParentColor}, 70%, 50%)`,
+          // loc: mentionCount,
+          children: tags.map(tag => {
+            const currentTagData = {
+              name: tag.name,
+              color: `hsl(${currentParentColor}, 70%, 50%)`, 
+              loc: tag.mentionCount,
+            };
+            return currentTagData;
+          })
         });
       });
       setSunBurstData(obj);
@@ -28,25 +41,15 @@ const CategoriesNTagsSunBurst = () => {
     }
   };
 
-  const getTagsStats = async () => {
-    try {
-      const {data} = await axios.get("http://localhost:3000/tags/list");
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
     getCategoriesStats();
-    getTagsStats();
   }, []);
 
-  console.log("sunBurstData --> ", sunBurstData);
+  if (!sunBurstData) return null;
 
   return (
     <SunBurstChart 
-      data={mockData} 
+      data={sunBurstData} 
     />
   );
 };

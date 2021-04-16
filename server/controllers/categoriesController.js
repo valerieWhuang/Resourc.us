@@ -3,6 +3,8 @@ const categoriesController = {};
 
 categoriesController.listAllCategories = (req, res, next) => {
   Categories.find({})
+    .populate('tags')
+    .exec()
     .then(data => {
       res.locals.response = data;
       console.log('categoriesController.listAllCategories:', 'all categories listed')

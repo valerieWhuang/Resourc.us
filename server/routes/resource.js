@@ -6,7 +6,7 @@ router.post('/create',
     resourcesController.createResource,
     (req, res) => {
         console.log('create resource router is working');
-        console.log(res.locals.response);
+        // console.log(res.locals.response);
         res.status(200).json(res.locals.response);
     }
 );
@@ -15,7 +15,7 @@ router.post('/list',
     resourcesController.listResources,
     (req, res) => {
         console.log('list resources router is working');
-        console.log(res.locals.response);
+        // console.log(res.locals.response);
         res.status(200).json(res.locals.response);
     }
 );
@@ -24,7 +24,7 @@ router.post('/listThree',
     resourcesController.listThreeResources,
     (req, res) => {
         console.log('list 3 resources router is working');
-        console.log(res.locals.response);
+        // console.log(res.locals.response);
         res.status(200).json(res.locals.response);
     }
 );
@@ -33,7 +33,7 @@ router.get('/listAll',
     resourcesController.listAllResources,
     (req, res) => {
         console.log('list all resources router is working');
-        console.log(res.locals.response);
+        // console.log(res.locals.response);
         res.status(200).json(res.locals.response);
     }
 );
@@ -42,7 +42,7 @@ router.post('/upvote',
     resourcesController.upvoteResource,
     (req, res) => {
         console.log('upvote resource router is working');
-        console.log(res.locals.response);
+        // console.log(res.locals.response);
         res.status(200).json(res.locals.response);
     }
 );

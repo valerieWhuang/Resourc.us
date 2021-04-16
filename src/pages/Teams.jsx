@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
-
-import { useUserContext } from '../StateProvider';
 import { CategoriesNTagsSunBurst } from "../components/CategoriesNTagsSunBurst";
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
-  const { user } = useUserContext();
-  console.log(user);
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list").then((response) => {
