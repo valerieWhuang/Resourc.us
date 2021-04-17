@@ -19,7 +19,7 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    fetch('/user/login', {
+    fetch('http://localhost:3000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

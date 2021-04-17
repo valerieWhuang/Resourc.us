@@ -108,6 +108,7 @@ teamsController.findUserTeams = async (req, res, next) => {
 
     res.locals.allTeamsArr = allTeamsArr;
     return next();
+}
 
 teamsController.addResourceToTeam = (req, res, next) => {
     console.log(' inside teamsController.addResourceToTeam:', res.locals.response)
