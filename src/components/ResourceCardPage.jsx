@@ -27,8 +27,12 @@ const ResourceCardPage = () => {
       });
 
   }, [])
+  console.log(resource);
   return (
-    <div></div>
+    <>
+      <div>{resource.link}</div>
+      <div>{resource.description}</div>
+    </>
   )
 }
 

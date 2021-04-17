@@ -126,7 +126,7 @@ resourcesController.upvoteResource = (req, res, next) => {
 
 resourcesController.getResourceById = (req, res, next) => {
 
-  Resources.find({
+  Resources.findOne({
     _id: req.params.id,
   })
     .then((data) => {

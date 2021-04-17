@@ -249,7 +249,7 @@ function ResourceCard({ teamId }) {
               </div>
             </div>
             <div className="link">
-              <Link to={`resource/${resource._id}`}>{resource.link}</Link>
+              <Link to={`resources/${resource._id}`}>{resource.link}</Link>
             </div>
           </div>
           <div className="comments">

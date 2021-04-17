@@ -79,7 +79,7 @@ function App() {
         <Route path="/signup"><SignupPage /></Route>
         <Route path="/login"><LoginPage /></Route>
         <Route path="/ResourceCard"><ResourceCard /></Route>
-        <Route path="/resource/:id"><ResourceCardPage /></Route>
+        <Route path="/resources/:id"><ResourceCardPage /></Route>
       </div>
     </div>
   );
