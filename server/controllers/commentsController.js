@@ -24,7 +24,9 @@ commentsController.createComment = (req, res, next) => {
 };
 
 commentsController.listAllComments = (req, res, next) => {
-  Comments.find({}) 
+  Comments.find({})
+    .populate('postedBy') 
+    .exec()
     .then(data => {
       res.locals.response = data;
       next();

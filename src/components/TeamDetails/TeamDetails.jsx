@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {ResourceCard} from "../ResourceCard";
-// import { Link } from 'react-router-dom';
+import {Button, Container, Row, Col} from "react-bootstrap";
+import {useUserContext} from '../../StateProvider';
 
 function TeamDetails({ match }) {
   // get the team ID from the URL params (destructure props.match.params)
   const { params: { id } } = match;
-
-  // set Team info in state
   const [team, setTeam] = useState([]);
-
-  // set Team Resources in state
   const [teamResources, setTeamResources] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const {user} = useUserContext();
 
   useEffect(() => {
     // when team page is visited, set current team in localStorage
@@ -37,27 +36,42 @@ function TeamDetails({ match }) {
       })
   }, [])
 
+  useEffect(() => {
+    if (!team[0]?.adminsList) setIsAdmin(false);
+    if (team[0]?.adminsList?.includes(user.user.id)) setIsAdmin(true);
+  }, [team]);
+
   return (
     <div className="container teamContainer">
-      <div className="teamCard teamHero">{team.map(t => <div key={t._id}>
-        <header>
-          <div className="mask"></div>
-          <h1>{t.name}</h1>
-        </header>
-        <section>
-        <div className="meta">
-          <div>{t.category}</div>
-          {console.log(t)}
-        </div>
-        <article><p>{t.description}</p></article>  
-        </section>
-        
-        <ResourceCard teamId={t._id}></ResourceCard>
+      <div className="teamCard teamHero">
+        {team.map(t => <div key={t._id}>
+          <header>
+            <div className="mask"></div>
+            <h1>{t.name}</h1>
+            {isAdmin && (
+              <Button 
+                variant="outline-dark" 
+                size="sm"
+                className="editButton"
+              >
+                Edit
+              </Button>
+            )}
+          </header>
+          <section>
+          <div className="meta">
+            <div>{t.categoriesList[0]?.name ?? "Category"}</div>
+          </div>
+          <article><p>{t.description}</p></article>  
+          </section>
+          
+          <ResourceCard teamId={t._id}></ResourceCard>
 
-        {teamResources.map(resource => 
-          <p key={resource._id}>{resource.title}</p>
-        )}
-      </div>)}</div>
+          {teamResources.map(resource => 
+            <p key={resource._id}>{resource.title}</p>
+          )}
+        </div>)}
+      </div>
     </div>
   );
 }

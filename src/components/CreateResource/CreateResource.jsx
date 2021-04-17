@@ -154,8 +154,7 @@ function CreateResource() {
 
   return (
     <div className='container formContainer'>
-      <h1>Create Resource Page</h1>
-
+      <h1>{_payload.title ? _payload.title : "New Resource"}</h1>
       <form>
         <div className="form-group">
           <input

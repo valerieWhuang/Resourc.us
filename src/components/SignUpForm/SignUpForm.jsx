@@ -17,7 +17,7 @@ const SignUpForm = () => {
   // eslint-disable-next-line no-unused-vars
   const onSubmit = (e) => {
     e.preventDefault();
-    fetch('/user/signup', {
+    fetch('http://localhost:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

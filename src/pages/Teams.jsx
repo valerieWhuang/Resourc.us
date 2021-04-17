@@ -46,10 +46,9 @@ function Teams() {
           </header>
           <section>
             <div className="meta">
-              {console.log(team.categoriesList)}
-              <div>{team.categoriesList[0]?.name}</div>
-              <div><i className='bx bx-merge'></i> 342</div>
-              <div><i className='bx bxs-user-account'></i> 24</div>
+              <div>{team.categoriesList[0]?.name ?? "Category"}</div>
+              <div><i className='bx bx-merge'></i>{team.resourcesCount}</div>
+              <div><i className='bx bxs-user-account'></i> {team.usersCount}</div>
             </div>
             <article>
               <p>{team.description}</p>

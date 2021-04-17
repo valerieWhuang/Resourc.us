@@ -13,7 +13,7 @@ function ResourceCard({ teamId }) {
   const [fetchedComments, setFetchedComments] = useState([]);
   // const [_upvote, setUpvote] = useState({});
   const _payload = { "teamId": teamId }
-  const [ { user } ] = useUserContext();
+  const { user } = useUserContext();
 
   useEffect(() => {
     fetch("http://localhost:3000/resource/list", {
@@ -155,56 +155,11 @@ function ResourceCard({ teamId }) {
     });
   }
 
-  // function handleDownvote(event) {
-
-  //   event.preventDefault();
-  //   const parent = document.getElementById("ethan");
-  //   const teamid = parent.getAttribute("value");
-  //   const link = parent.getAttribute("link");
-  //   const votes = Number(parent.getAttribute("votes"));
-  //   const payload = {
-  //     "link" : link,
-  //     "teamId": teamid,
-  //     "votes": votes,
-  //     "upvote": false
-  //   }
-  //   // POST the payload to database
-  //   fetch("http://localhost:3000/resource/upvote", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json, text/plain, */*",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(payload),
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const newResource = _resource;
-  //       for (let i = 0; i < newResource.length; i++) {
-  //         if (newResource[i].link === data.link) {
-  //           newResource[i] = data;
-  //         }
-  //       }
-  //       setResource(newResource)
-  //     })
-  //     .catch((err) => {
-  //       console.error("Post Fail", err);
-  //     });
-  // }
   return (
     <div className="container">
-      {/* <h1>Resource Card</h1>
-      <div>
-        <h1>{_resource.link}</h1>
-        <h1>{_resource.votes}</h1>
-        <button onClick={handleUpvote}>Upvote</button>
-        <button onClick={handleDownvote}>Downvote</button>
-      </div> */}
       {_resource.map((resource) => (
-        <>
-          <div className="resourceCard" key={resource._id}>
+        <div key={resource._id}>
+          <div className="resourceCard">
             <div className="votes">
               <div className="voteCount">{resource.votes}</div>
               <div className="actions">
@@ -242,10 +197,10 @@ function ResourceCard({ teamId }) {
                 return fetchedComment.resourceId === resource._id;
               })
               .map((filteredComment) => {
-                return <div>{`${filteredComment.message} posted by ${filteredComment.postedBy}`}</div>;
+                return <div key={filteredComment._id}>{`${filteredComment.message} posted by ${filteredComment.postedBy}`}</div>;
               })}
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
