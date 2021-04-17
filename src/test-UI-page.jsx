@@ -96,41 +96,23 @@ function TestPage () {
 
 					<div className="row">
             {/* CARD COMPONENT (team or resource) */}
-						<div className="col-12 col-md-6 col-lg-3">
+            <div className="col-12 col-md-6 col-lg-4">
 							<div className="card">
-								<div className="card-header px-4 pt-4">
-									<div className="card-actions float-right">
-										<div className="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-                      <i className="align-middle" data-feather="more-horizontal"></i>
-                    </a>
 
-											<div className="dropdown-menu dropdown-menu-right">
-												<a className="dropdown-item" href="#">Action</a>
-												<a className="dropdown-item" href="#">Another action</a>
-												<a className="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 className="card-title mb-0">Landing page redesign</h5>
-									<div className="badge badge-success my-2">Finished</div>
+								<img className="card-img-top" src="img/photos/unsplash-1.jpg" alt="Unsplash" />
+
+								<div className="card-header px-4 pt-4">
+									<h5 className="card-title mb-0">Codesmith PTRI 2</h5>
+									<div className="badge badge-secondary my-2">Computer Science</div>
 								</div>
 								<div className="card-body px-4 pt-2">
-									<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
-
-									<img src="img/avatars/avatar-3.jpg" className="rounded-circle mr-1" alt="Avatar" width="28" height="28" />
-									<img src="img/avatars/avatar-2.jpg" className="rounded-circle mr-1" alt="Avatar" width="28" height="28" />
-									<img src="img/avatars/avatar.jpg" className="rounded-circle mr-1" alt="Avatar" width="28" height="28" />
+									<p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.</p>
 								</div>
-								<ul className="list-group list-group-flush">
-									<li className="list-group-item px-4 pb-4">
-										<p className="mb-2 font-weight-bold">Progress <span className="float-right">100%</span></p>
-										<div className="progress progress-sm">
-											<div className="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-											</div>
-										</div>
-									</li>
-								</ul>
+                <div className="card-body px-4 pt-2">
+                  <button className="btn btn-outline-info">View</button>
+                  <button className="btn btn-success btn-join-team">Join</button>
+                </div>
+	
 							</div>
 						</div>
           </div>
