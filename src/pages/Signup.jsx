@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignupForm from '../components/signup/SignupForm';
+import {SignUpForm} from '../components';
 
 const SignupPage = () => (
   <div className="container formContainer">
     <h1>This is Signup.</h1>
-    <SignupForm />
+    <SignUpForm />
     <p>
       Have an account?
       <Link to="/login">Log In</Link>

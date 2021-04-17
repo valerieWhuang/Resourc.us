@@ -3,13 +3,11 @@ import { Link, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
 import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
-import { useUserContext } from '../StateProvider'
+import { useUserContext } from '../StateProvider';
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
-  const [{ user }, dispatch] = useUserContext();
-  console.log(user);
-
+  const { user , dispatch} = useUserContext();
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list").then((response) => {
@@ -17,9 +15,8 @@ function Teams() {
     }).then(data => {
       console.log(data);
       setTeams(data);
-      // console.log(data); ENDLESS RUNNING BUG!?
     }).catch(err => {
-      console.log('GET FAILED', err);
+      console.error('GET FAILED', err);
     })
   }, []);
 
@@ -95,9 +92,9 @@ function Teams() {
             </header>
             <section>
               <div className="meta">
-                <div>{team.category}</div>
-                <div><i className='bx bx-merge'></i> 342</div>
-                <div><i className='bx bxs-user-account'></i> 24</div>
+                <div>{team.categoriesList[0]?.name ?? "Category"}</div>
+                <div><i className='bx bx-merge'></i>{team.resourcesCount}</div>
+                <div><i className='bx bxs-user-account'></i> {team.usersCount}</div>
               </div>
               <article>
                 <p>{team.description}</p>

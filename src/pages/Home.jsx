@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useUserContext } from '../StateProvider';
 
 function HomePage() {
-  const [{ user }, dispatch] = useUserContext();
+  const { user , dispatch } = useUserContext();
   const [ teams, setTeams ] = useState([]);
   const [ otherTeams, setOtherTeams ] = useState([]);
 
@@ -28,7 +28,7 @@ function HomePage() {
   }
 
   useEffect(()=> {
-    if (user.isLoggedIn) {
+    if (user.user.isLoggedIn) {
       fetch("http://localhost:3000/teams/joinedList")
       .then((res) => res.json())
       .then(allTeams => {
@@ -36,7 +36,7 @@ function HomePage() {
         const nonUserTeams = [];
 
         for (let i=0; i < allTeams.length; i++) {
-          if (user.teamsList.includes(allTeams[i]._id.toString())) {
+          if (user.user.teamsList.includes(allTeams[i]._id.toString())) {
             userTeams.push(allTeams[i])
           } else {
             nonUserTeams.push(allTeams[i])
@@ -54,7 +54,7 @@ function HomePage() {
 
   const joinTeam = (team) => {
     console.log("join team", team);
-    const updatedUser = JSON.parse(JSON.stringify(user));
+    const updatedUser = JSON.parse(JSON.stringify(user.user));
     updatedUser.teamsList.push(team._id);
     dispatch({
       type: 'JOIN_TEAM',
@@ -97,7 +97,7 @@ function HomePage() {
 
   const leaveTeam = (team) => {
     console.log(team);
-    const updatedUser = JSON.parse(JSON.stringify(user));
+    const updatedUser = JSON.parse(JSON.stringify(user.user));
     let index = undefined;
     for (let i=0; i < updatedUser.teamsList.length; i++){
       if (updatedUser.teamsList[i] === team._id){
@@ -153,8 +153,8 @@ function HomePage() {
     <div className="container">
       <h1>Home Page</h1>
       <div className="cardContainer">
-        {user.isLoggedIn && <h2>Your Teams:</h2>}
-        {user.isLoggedIn && teams.map(team =>
+        {user.user.isLoggedIn && <h2>Your Teams:</h2>}
+        {user.user.isLoggedIn && teams.map(team =>
           <div className="teamCard" key={team._id}>
             <header>
               <img src="https://images.unsplash.com/photo-1612392166886-ee8475b03af2?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80" />
@@ -172,15 +172,15 @@ function HomePage() {
               </article>
               <div className="actions">
                 <div>
-                  { user.teamsList.indexOf(team._id) !== -1 && <button type="button" onClick={() => leaveTeam(team)}>Leave Team</button>}
+                  { user.user.teamsList.indexOf(team._id) !== -1 && <button type="button" onClick={() => leaveTeam(team)}>Leave Team</button>}
                   <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
                 </div>
               </div>
             </section>
           </div>
         )}
-        {user.isLoggedIn && <h2>Discover:</h2>}
-        {user.isLoggedIn && otherTeams.map(team =>
+        {user.user.isLoggedIn && <h2>Discover:</h2>}
+        {user.user.isLoggedIn && otherTeams.map(team =>
           <div className="teamCard" key={team._id}>
             <header>
               <img src="https://images.unsplash.com/photo-1612392166886-ee8475b03af2?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80" />
@@ -198,8 +198,8 @@ function HomePage() {
               </article>
               <div className="actions">
                 <div>
-                { user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team)}>Join</button>}
-                { user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
+                { user.user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team)}>Join</button>}
+                { user.user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
                   <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
                 </div>
               </div>

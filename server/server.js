@@ -11,7 +11,7 @@ const userRouter = require('./routes/user');
 const teamRouter = require('./routes/team');
 const resourceRouter = require('./routes/resource');
 const commentRouter = require('./routes/comment');
-const tagRouter = require('./routes/tag');
+const tagRouter = require('./routes/tag')
 const categoryRouter = require('./routes/category');
 
 const PORT = 3000;
