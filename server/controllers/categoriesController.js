@@ -7,7 +7,6 @@ categoriesController.listAllCategories = (req, res, next) => {
     .exec()
     .then(data => {
       res.locals.response = data;
-      console.log('categoriesController.listAllCategories:', 'all categories listed')
       next();
     })
     .catch(err => {
@@ -20,5 +19,4 @@ categoriesController.listAllCategories = (req, res, next) => {
       })
     })
 }
-
 module.exports = categoriesController;

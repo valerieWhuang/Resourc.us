@@ -7,7 +7,7 @@ const options = {
   updatedAt: "updated_at"
 };
 
-const TeamsSchema = new Schema({ // teamSchema
+const TeamsSchema = new Schema({
   name: { 
     type: String, 
     required: true, 
@@ -15,10 +15,10 @@ const TeamsSchema = new Schema({ // teamSchema
   },
   categoriesList: [{
     type: Schema.Types.ObjectId, 
-    ref: 'Categories'
-  }], // category: { type: String, required: true },
+    ref: 'categories'
+  }],
   description: { type: String },
-  profilePic: { type: String }, // image
+  profilePic: { type: String },
   usersList: [{
     type: Schema.Types.ObjectId, 
     ref: 'Users'
@@ -35,6 +35,5 @@ const TeamsSchema = new Schema({ // teamSchema
   }]
 }, options);
 
-// var Team = mongoose.model('Team', teamSchema);
 var Teams = mongoose.model('teams', TeamsSchema);
 module.exports = { Teams };

@@ -24,10 +24,14 @@ nav {
                 flex-direction: column;
             }
         }
-        ul {
+        .navItem {
             padding-left: 1rem;
-            li {
+            .content {
                 margin-bottom: 1rem;
+                color: #adb5bd;
+                span {
+                    padding-left: 1rem;
+                }
             }
         }
     } 

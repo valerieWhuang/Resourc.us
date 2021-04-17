@@ -19,7 +19,6 @@ router.post(
   passport.authenticate('signup', { session: false }),
   async (req, res, next) => {
     try {
-      console.log('login User router is working');
       res.status(200).json(req.user);
     } catch (error) {
       console.log(error);
@@ -32,7 +31,6 @@ router.post(
   passport.authenticate('login', { session: false }),
   async (req, res, next) => {
     try {
-      console.log('login User router is working');
       res.status(200).json(req.user);
     } catch (error) {
       console.log(error);
