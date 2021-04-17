@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Multiselect } from 'multiselect-react-dropdown';
 
-function createResource() {
+function CreateResource() {
   const currentTeam = localStorage.getItem('currentTeam')
   const currentUser = localStorage.getItem('currentUser')
   
@@ -154,8 +154,7 @@ function createResource() {
 
   return (
     <div className='container formContainer'>
-      <h1>Create Resource Page</h1>
-
+      <h1>{_payload.title ? _payload.title : "New Resource"}</h1>
       <form>
         <div className="form-group">
           <input
@@ -220,4 +219,4 @@ function createResource() {
   );
 }
 
-export default createResource;
+export {CreateResource};

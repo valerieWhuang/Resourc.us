@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // nav {
 //     min-height: 100vh;
 //     &.bg-dark {
@@ -32,3 +33,43 @@
 //         }
 //     } 
 // }
+=======
+nav {
+    min-height: 100vh;
+    &.bg-dark {
+        background-color: #293042!important;
+        color: #fff;
+        a {
+            color: #adb5bd;
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+        }
+    }
+    &.navbar {
+        position: relative;
+        display: block;
+        &.navbar-expand-lg {
+            .navbar-collapse {
+                flex-direction: column;
+            }
+            .navbar-nav {
+                left: 1.5rem;
+                position: fixed;
+                flex-direction: column;
+            }
+        }
+        .navItem {
+            padding-left: 1rem;
+            .content {
+                margin-bottom: 1rem;
+                color: #adb5bd;
+                span {
+                    padding-left: 1rem;
+                }
+            }
+        }
+    } 
+}
+>>>>>>> origin

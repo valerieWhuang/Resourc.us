@@ -12,21 +12,20 @@ const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema(
   {
-    // userSchema
     firstName: {
       type: String,
       required: [true, "can't be blank"],
-    }, // firstname
+    },
     lastName: {
       type: String,
       required: [true, "can't be blank"],
-    }, // lastname
+    },
     emailAddress: {
       type: String,
       required: [true, "can't be blank"],
       // unique: true,
       // index: true,
-    }, // email
+    },
     googleId: {
       type: String,
     },

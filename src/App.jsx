@@ -9,15 +9,18 @@ import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import Teams from './pages/Teams';
-import TeamDetailPage from './components/TeamDetailPage';
 import LandingPage from './pages/LandingPage'
 
 // import components
-import Navbars from './components/Navbar';
-import CreateTeam from './components/CreateTeam';
-import CreateResource from './components/CreateResource';
-import ResourceCard from './components/ResourceCard';
+import {
+  CreateResource,
+  ResourceCard,
+  CreateTeam,
+  TeamDetails,
+  NavBar,
+ } from './components';
 import { useStateValue } from './StateProvider';
+import ResourceCardPage from './components/ResourceCardPage';
 
 function App() {
   const location = useLocation().pathname;
@@ -57,17 +60,17 @@ function App() {
       { user.isLoggedIn || localStorage.getItem('userIsLoggedIn') ? (
       <div>
         <Route path="/" exact component={Home}></Route>
-        <Route path="/teams/:id" component={TeamDetailPage} />
+        <Route path="/teams/:id" component={TeamDetails} />
         <Route path="/teams" exact component={Teams} />
-        <Route path="/CreateResource"><CreateResource /></Route>
-        <Route path="/CreateTeam"><CreateTeam /></Route>
-        <Route path="/ResourceCard"><ResourceCard /></Route>
+        <Route path="/CreateResource" component={CreateResource} />
+        <Route path="/CreateTeam" component={CreateTeam} />
+        <Route path="/resources" component={ResourceCard} /> 
       </div>
       ) : (
         <div>
           <Route path="/" exact component={LandingPage}></Route>
-          <Route path="/signup"><SignupPage /></Route>
-          <Route path="/login"><LoginPage /></Route>
+          <Route path="/signup" component={SignupPage} />
+          <Route path="/login" component={LoginPage} />
         </div>
       )}
 

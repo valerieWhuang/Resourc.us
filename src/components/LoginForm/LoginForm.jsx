@@ -19,7 +19,7 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    fetch('/user/login', {
+    fetch('http://localhost:3000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const LoginForm = () => {
             lastName: res.lastName,
             emailAddress: res.emailAddress,
             googleId: res.googleId,
-            teamList: res.teamList,
+            teamsList: res.teamsList,
             id: res._id,
           },
         });
@@ -125,4 +125,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export {LoginForm};

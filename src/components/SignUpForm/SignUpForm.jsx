@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const [values, setValues] = useState({
     emailAddress: '',
     password: '',
@@ -17,7 +17,7 @@ const SignupForm = () => {
   // eslint-disable-next-line no-unused-vars
   const onSubmit = (e) => {
     e.preventDefault();
-    fetch('/user/signup', {
+    fetch('http://localhost:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,4 +82,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export {SignUpForm};

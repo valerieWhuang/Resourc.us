@@ -12,7 +12,6 @@ passport.use(
     },
     // eslint-disable-next-line consistent-return
     async (req, emailAddress, password, done) => {
-      console.log('hello! about to create user!', emailAddress, password, req.body.firstName, req.body.lastName);
       try {
         const user = await UsersModel.create({
           emailAddress,
@@ -21,7 +20,6 @@ passport.use(
           lastName: req.body.lastName,
           teamsList: [],
         });
-        console.log('after creation', user);
         return done(null, user);
       } catch (error) {
         console.log(error);
@@ -39,7 +37,6 @@ passport.use(
       passwordField: 'password',
     },
     async (emailAddress, password, done) => {
-      console.log("we made it this far in the log in!!", emailAddress, password);
       try {
         const user = await UsersModel.findOne({ emailAddress });
         if (!user) {
@@ -50,7 +47,6 @@ passport.use(
         if (!validate) {
           return done(null, false, { message: 'Wrong password!' });
         }
-        console.log(user);
         return done(null, user, { message: 'Logged in Successfully!' });
       } catch (error) {
         console.log(error);

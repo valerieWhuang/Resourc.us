@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import axios from "axios";
 
-function createTeam() {
+function CreateTeam() {
   const history = useHistory();
-
   const [_payload, setPayload] = useState({
     name: '',
     image: '',
@@ -48,7 +47,7 @@ function createTeam() {
 
   return (
     <div className="container formContainer">
-      <h1>Create Team Page</h1>
+      <h1>{_payload.name ? _payload.name : "New Team"}</h1>
       <form>
         <div className="form-group">
           <input
@@ -94,4 +93,4 @@ function createTeam() {
   );
 }
 
-export default createTeam;
+export {CreateTeam};
