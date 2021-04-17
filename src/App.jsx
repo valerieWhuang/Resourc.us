@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { hot } from 'react-hot-loader';
 // import router
-import { Route, Link, useLocation } from 'react-router-dom';
+import { Route, Link, useLocation, useHistory } from 'react-router-dom';
 
 // import pages
 import Home from './pages/Home';
@@ -19,6 +19,8 @@ import { useStateValue } from './StateProvider';
 
 function App() {
   const location = useLocation().pathname;
+  const history = useHistory();
+  
   const [button, setButton] = useState(<Link to="/CreateResource" className="btn btn-success">Create Resource</Link>);
   // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
@@ -34,15 +36,23 @@ function App() {
   }, [location]);
 
   const userLogout = () => {
+    // TO DO: consolidate
+    localStorage.setItem('userIsLoggedIn', "false")
+    localStorage.setItem('currentUser', "")
+    localStorage.setItem('currentTeam', "")
+
     dispatch({
       type: 'UNAUTH_USER',
     });
+
+    history.push('/');
   };
 
   console.log("User is logged in", user.isLoggedIn, user);
 
   return (
     <div className="outerContainer">
+      {/* {user.isLoggedIn && <Navbars />} */}
       <Navbars />
       <div className="innerContainer">
         <header className="mainHeader">

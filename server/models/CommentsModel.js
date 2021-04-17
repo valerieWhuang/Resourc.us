@@ -14,8 +14,14 @@ const CommentsSchema = new Schema({
   },
   postedBy: {
     type: Schema.Types.ObjectId, 
-    ref: 'Users'
+    ref: 'Users',
+    required: true
   },
+  resourceId: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Resources',
+    required: true
+  }
 }, options);
 
 var Comments = mongoose.model('comments', CommentsSchema);

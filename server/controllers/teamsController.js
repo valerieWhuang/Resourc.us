@@ -108,6 +108,35 @@ teamsController.findUserTeams = async (req, res, next) => {
 
     res.locals.allTeamsArr = allTeamsArr;
     return next();
+
+teamsController.addResourceToTeam = (req, res, next) => {
+    console.log(' inside teamsController.addResourceToTeam:', res.locals.response)
+    const teamID = res.locals.response.team
+    const resourceID = res.locals.response._id
+
+    // find team by ID,
+    // update its resourceCount,
+    // and add the resource ID to resourcesList array
+    Teams.findById(teamID, (err, record) => {
+        if (err) return res.send(err)
+
+        record.resourcesList = [...record.resourcesList, resourceID]
+        record.resourcesCount = record.resourcesCount + 1
+
+        record.save((err, newRecord) => {
+            err ? res.send(err) : console.log('team resource update result:', newRecord)  
+        })
+        return next()
+    })
+    .catch (err => {
+        next({
+          log: `List All Tags - ERROR: ${err}`,
+          message: {
+              err: 'Error occured in teamsController.addResourceToTeam',
+              message: err
+          }
+        })
+      })
 }
 
 module.exports = teamsController;

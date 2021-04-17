@@ -10,7 +10,7 @@ resourcesController.createResource = (req, res, next) => {
         link: requestBody.link,
         team: requestBody.team,
         votes: 0,
-        subCategories: requestBody.subCategories,
+        tags: requestBody.tags,
         commentsList: [],
         postedBy: requestBody.postedBy,
         relatedLocation: requestBody.relatedLocation,
