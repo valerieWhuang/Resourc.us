@@ -12,7 +12,6 @@ import Navbar from "react-bootstrap/Navbar";
 // import FormControl from "react-bootstrap/FormControl";
 
 function Navbars() {
-  console.log("Testing reloader on dev")
   return (
     <Navbar bg="dark" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

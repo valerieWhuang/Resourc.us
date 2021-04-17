@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
-
-import { useUserContext } from '../StateProvider';
+import { Container, Row, Col } from 'reactstrap';
+import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
+import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
   const [{ user }, dispatch] = useUserContext();
   console.log(user);
+
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list").then((response) => {
@@ -68,35 +70,50 @@ function Teams() {
   }
 
   return (
-    <div className="cardContainer">
-      {_teams.map(team =>
-        <div className="teamCard" key={team.name}>
-          <header>
-            <img src="https://images.unsplash.com/photo-1612392166886-ee8475b03af2?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80" />
-            <div className="mask" style={{ background: `linear-gradient(${colors[colorPicker()][0]}, ${colors[colorPicker()][1]})` }}></div>
-            <h1>{team.name}</h1>
-          </header>
-          <section>
-            <div className="meta">
-              <div>{team.category}</div>
-              <div><i className='bx bx-merge'></i> 342</div>
-              <div><i className='bx bxs-user-account'></i> 24</div>
+    <>
+      <Container>
+        <Row>
+          <Col xs="6">
+            <div style={{ width: 400, height: 300 }}>
+              <CategoriesTagsSunBurst />
             </div>
-            <article>
-              <p>{team.description}</p>
-            </article>
-            <div className="actions">
-              <div>
-                { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
-                { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
-                {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
-                <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
+          </Col>
+          <Col xs="6">
+            <PopularResourcesBarChart />
+          </Col>
+        </Row>
+      </Container>
+      <div className="cardContainer">
+        {_teams.map(team =>
+          <div className="teamCard" key={team.name}>
+            <header>
+              <img src="https://images.unsplash.com/photo-1612392166886-ee8475b03af2?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80" />
+              <div className="mask" style={{ background: `linear-gradient(${colors[colorPicker()][0]}, ${colors[colorPicker()][1]})` }}></div>
+              <h1>{team.name}</h1>
+            </header>
+            <section>
+              <div className="meta">
+                <div>{team.category}</div>
+                <div><i className='bx bx-merge'></i> 342</div>
+                <div><i className='bx bxs-user-account'></i> 24</div>
               </div>
-            </div>
-          </section>
-        </div>
-      )}
-    </div>
+              <article>
+                <p>{team.description}</p>
+              </article>
+              <div className="actions">
+                <div>
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
+                  <Link className="btn btn-default" to="/#">Join</Link>
+                  {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
+                  <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
