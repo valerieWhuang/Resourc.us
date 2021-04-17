@@ -1,4 +1,6 @@
 const { Teams } = require('../models/TeamsModel');
+const UsersModel = require('../models/UsersModel');
+
 const teamsController = {};
 
 teamsController.createTeam = (req, res, next) => {
@@ -17,7 +19,6 @@ teamsController.createTeam = (req, res, next) => {
     })
         .then(data => {
             res.locals.response = data;
-            console.log('teamsController.createTeam:', 'team created')
             next();
         })
         .catch(err => {
@@ -33,10 +34,10 @@ teamsController.createTeam = (req, res, next) => {
 
 teamsController.listTeams = (req, res, next) => {
     Teams.find({})
+        .populate('categoriesList')
+        .exec()
         .then(data => {
             res.locals.response = data;
-            console.log("Data from the db --> ", data);
-            console.log('teamsController.listTeams:', 'list found')
             next();
         })
         .catch(err => {
@@ -54,7 +55,6 @@ teamsController.findTeam = (req, res, next) => {
     Teams.findOne({ "_id": req.params.id})
         .then(data => {
             res.locals.response = data;
-            console.log('teamsController.listTeams:', 'team found')
             next();
         })
         .catch(err => {
@@ -73,7 +73,6 @@ teamsController.listThreeTeams = (req, res, next) => {
     Teams.find({}, null, { limit: 3 })
         .then(data => {
             res.locals.response = data;
-            console.log('teamsController.listThreeTeams:', '3 list found: ', res.locals.response)
             next();
         })
         .catch(err => {
@@ -87,9 +86,28 @@ teamsController.listThreeTeams = (req, res, next) => {
         });
 }
 
+teamsController.joinTeam = async (req, res, next) => {
+    const { id, teamsList } = req.body;
+    const updatedUser = await UsersModel.findOneAndUpdate({ _id: id }, { teamsList }, {new: true})
+    res.locals.user = updatedUser;
+    return next();
+}
+
+teamsController.leaveTeam = async (req, res, next) => {
+    const { id, teamsList } = req.body;
+    const updatedUser = await UsersModel.findOneAndUpdate({ _id: id }, { teamsList }, {new: true})
+    res.locals.user = updatedUser;
+    return next();
+}
+
+teamsController.findUserTeams = async (req, res, next) => {
+    const allTeamsArr = await Teams.find({});
+
+    res.locals.allTeamsArr = allTeamsArr;
+    return next();
+}
 
 teamsController.addResourceToTeam = (req, res, next) => {
-    console.log(' inside teamsController.addResourceToTeam:', res.locals.response)
     const teamID = res.locals.response.team
     const resourceID = res.locals.response._id
 

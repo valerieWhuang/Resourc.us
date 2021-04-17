@@ -12,21 +12,20 @@ const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema(
   {
-    // userSchema
     firstName: {
       type: String,
       required: [true, "can't be blank"],
-    }, // firstname
+    },
     lastName: {
       type: String,
       required: [true, "can't be blank"],
-    }, // lastname
+    },
     emailAddress: {
       type: String,
       required: [true, "can't be blank"],
       // unique: true,
       // index: true,
-    }, // email
+    },
     googleId: {
       type: String,
     },
@@ -61,5 +60,5 @@ UsersSchema.methods.isValidPassword = async function (password) {
   return compare;
 };
 
-const UsersModel = mongoose.model("Users", UsersSchema);
+const UsersModel = mongoose.model("users", UsersSchema);
 module.exports = UsersModel;

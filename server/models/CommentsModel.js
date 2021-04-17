@@ -14,7 +14,7 @@ const CommentsSchema = new Schema({
   },
   postedBy: {
     type: Schema.Types.ObjectId, 
-    ref: 'Users',
+    ref: 'users',
     required: true
   },
   resourceId: {

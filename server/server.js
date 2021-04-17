@@ -12,6 +12,7 @@ const teamRouter = require('./routes/team');
 const resourceRouter = require('./routes/resource');
 const commentRouter = require('./routes/comment');
 const tagRouter = require('./routes/tag')
+const categoryRouter = require('./routes/category');
 
 const PORT = 3000;
 
@@ -27,6 +28,7 @@ app.use('/teams', teamRouter);
 app.use('/resource', resourceRouter);
 app.use('/comment', commentRouter);
 app.use('/tags', tagRouter);
+app.use('/categories', categoryRouter);
 
 // Renders index.html with static assets
 app.use(express.static(path.join(__dirname, '../dist')));

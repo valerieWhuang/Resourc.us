@@ -3,7 +3,6 @@ const commentsController = {};
 
 commentsController.createComment = (req, res, next) => {
   const requestBody = req.body;
-  console.log(req.body);
   Comments.create({
     message: requestBody.message,
     postedBy: requestBody.postedBy,
@@ -11,7 +10,6 @@ commentsController.createComment = (req, res, next) => {
   })
     .then(data => {
       res.locals.response = data;
-      console.log('commentsController');
       next();
     })
     .catch(err => {
@@ -26,10 +24,11 @@ commentsController.createComment = (req, res, next) => {
 };
 
 commentsController.listAllComments = (req, res, next) => {
-  Comments.find({}) 
+  Comments.find({})
+    .populate('postedBy') 
+    .exec()
     .then(data => {
       res.locals.response = data;
-      console.log('commentsController.listAllComments:', 'all comments listed')
       next();
     })
     .catch(err => {
@@ -55,7 +54,6 @@ commentsController.editComment = (req, res, next) => {
   })
     .then((data) => {
       res.locals.response = data;
-      console.log('commentsController.editComments:', 'comment edited');
       next();
     })
     .catch((err) => {
@@ -76,7 +74,6 @@ commentsController.deleteComment = (req, res, next) => {
   })
     .then((data) => {
       res.locals.response = data;
-      console.log('commentsController.deleteComment:', 'comment deleted');
       next();
     })
     .catch((err) => {

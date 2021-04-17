@@ -1,6 +1,34 @@
 @import './components/resets',
         './globals',
+
+        // new styles
+        'appstack/light.scss',
+
+        // old styles
         './components/container',
         './components/navbar',
         './components/mainHeader',
         './components/teamCard';
+
+
+body > * {
+  font-size: 1.1rem;
+}
+
+.hamburger {
+  font-size: 2rem;
+  margin-top: 5px;
+}
+
+.card-img, 
+.card-img-top, 
+.card-img-bottom {
+  height: 200px;
+  max-height: 100%;
+  max-width: 100%;
+}
+        
+
+.btn-join-team {
+  margin-left: 10px;
+}

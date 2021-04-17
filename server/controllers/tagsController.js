@@ -10,7 +10,6 @@ tagsController.createTag = (req, res, next) => {
   })
   .then(data => {
     res.locals.response = data;
-    console.log('tagsController.createTag', 'tag created')
     next()
   })
   .catch(err => {
@@ -28,7 +27,6 @@ tagsController.listAllTags = (req, res, next) => {
   Tags.find({})
     .then(data => {
       res.locals.response = data;
-      console.log('tagsController.listAllTags:', 'all tags listed')
       next();
     })
     .catch(err => {
@@ -43,7 +41,6 @@ tagsController.listAllTags = (req, res, next) => {
 }
 
 tagsController.incrementTagCount = (req, res, next) => {
-  console.log('inside tagsController.incrementTagCount:', res.locals.response)
   const tagIDs = res.locals.response.tags 
 
   // select all the documents that match a value in the tagIDs array
@@ -51,7 +48,6 @@ tagsController.incrementTagCount = (req, res, next) => {
     .then(records => {
       // update and save each document
       records.forEach(record => {
-        console.log('tag record: ', record)
         Tags.findByIdAndUpdate(record._id, {mentionCount: record.mentionCount + 1}, (err, result) => {
           err ? res.send(err) : console.log('tag count update result:', result)  
         })

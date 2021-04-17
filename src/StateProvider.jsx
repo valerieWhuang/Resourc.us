@@ -16,7 +16,12 @@ const useUserContext = () => {
   if (!contextValues) {
     throw new Error('useUserContext must be used within UserContextProvider!');
   }
-  return contextValues;
+  const user = contextValues[0];
+  const dispatch = contextValues[1];
+  return {
+    user,
+    dispatch,
+  };
 };
 
 // Pull information from the data layer
