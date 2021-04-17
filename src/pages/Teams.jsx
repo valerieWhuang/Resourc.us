@@ -138,7 +138,7 @@ function Teams() {
               </a>
 
 							<a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                <i className='bx bx-user-circle' ></i> <span className="text-dark">{user.user.firstName} {user.user.lastName}</span>
+                <i className='bx bx-user-circle' ></i> <span className="text-dark">{user.firstName} {user.lastName}</span>
                 {/* <img src={avatar} className="avatar img-fluid rounded-circle mr-1" alt="Chris Wood" /> <span className="text-dark">Chris Wood</span> */}
               </a>
 							<div className="dropdown-menu dropdown-menu-right">
@@ -187,7 +187,7 @@ function Teams() {
 								<div className="card-header px-4 pt-4">
 									<h5 className="card-title mb-0">{team.name}</h5>
                   <div className="meta">
-                  <div className="badge badge-secondary my-2">{team.categoriesList[0] ? team.categoriesList[0] : "General"}</div>
+                    <div className="badge badge-secondary my-2">{team.categoriesList[0] ? team.categoriesList[0].name : "General"}</div>
                     <div><i className='bx bx-merge'></i>{team.resourcesCount}</div>
                     <div><i className='bx bxs-user-account'></i> {team.usersCount}</div>
                   </div>
