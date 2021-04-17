@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
 import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
+import { useUserContext } from '../StateProvider'
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
@@ -36,6 +37,7 @@ function Teams() {
     ['#673AB7', '#512DA8'],
     ['#005C97', '#363795']
   ]
+
   function colorPicker() {
     return Math.floor(Math.random() * colors.length);
   }
@@ -104,7 +106,6 @@ function Teams() {
                 <div>
                   { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
                   { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
-                  <Link className="btn btn-default" to="/#">Join</Link>
                   {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
                   <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
                 </div>
