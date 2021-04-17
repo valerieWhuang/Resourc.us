@@ -7,6 +7,7 @@ commentsController.createComment = (req, res, next) => {
   Comments.create({
     message: requestBody.message,
     postedBy: requestBody.postedBy,
+    resourceId: requestBody.resourceId
   })
     .then(data => {
       res.locals.response = data;

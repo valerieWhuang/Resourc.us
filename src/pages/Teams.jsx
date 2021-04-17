@@ -6,11 +6,15 @@ import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
+  const [{ user }, dispatch] = useUserContext();
+  console.log(user);
+
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list").then((response) => {
       return response.json(); //Parses to JSON
     }).then(data => {
+      console.log(data);
       setTeams(data);
       // console.log(data); ENDLESS RUNNING BUG!?
     }).catch(err => {
@@ -34,6 +38,35 @@ function Teams() {
   ]
   function colorPicker() {
     return Math.floor(Math.random() * colors.length);
+  }
+
+  const joinTeam = (teamID) => {
+    console.log(teamID);
+    const updatedUser = JSON.parse(JSON.stringify(user));
+    updatedUser.teamsList.push(teamID);
+
+    dispatch({
+          type: 'JOIN_TEAM',
+          item: updatedUser,
+        })
+
+    // Add to mongoDB database    
+    fetch("http://localhost:3000/teams/join", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then((res) => res.json())
+      .then(res => {
+        console.log(res);
+        console.log(res.teamsList);
+      }).catch(err => {
+        console.log('UPDATING TEAM FAILED', err);
+      })
+    
+
   }
 
   return (
@@ -69,6 +102,8 @@ function Teams() {
               </article>
               <div className="actions">
                 <div>
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
                   <Link className="btn btn-default" to="/#">Join</Link>
                   {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
                   <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
