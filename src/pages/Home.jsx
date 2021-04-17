@@ -241,8 +241,6 @@ function HomePage() {
           <h1>Welcome Back, {user.firstName}</h1>
 
 					<div className="row">
-            <p>KEVIN'S PR GOES HERE </p>
-
             {user.user.isLoggedIn && <h2>Your Teams:</h2>}
 
             {/* CARD COMPONENT (team) */}
