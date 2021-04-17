@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from 'react-router-dom';
-<<<<<<< HEAD
-
+import { Container, Row, Col } from 'reactstrap';
+import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
+import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
 import { useUserContext, useStateValue } from '../StateProvider';
 
 function Teams() {
   const [_teams, setTeams] = useState([]);
-  // const { user } = useUserContext();
-  // console.log(user);
-=======
-import { Container, Row, Col } from 'reactstrap';
-import { CategoriesTagsSunBurst } from '../components/CategoriesTagsSunBurst';
-import { PopularResourcesBarChart } from '../components/PopularResourcesBarChart';
-import { useUserContext } from '../StateProvider';
-
-function Teams() {
-  const [_teams, setTeams] = useState([]);
   const { user , dispatch} = useUserContext();
->>>>>>> origin
+
+  // get values from state
+  // const [{ user }, dispatch] = useStateValue();
+  console.log('user:', user)
 
   useEffect(() => {
     fetch("http://localhost:3000/teams/list")
@@ -26,7 +20,6 @@ function Teams() {
     }).then(data => {
       console.log(data);
       setTeams(data);
-<<<<<<< HEAD
       // console.log(data); ENDLESS RUNNING BUG!?
     })
     .catch(err => {
@@ -51,35 +44,6 @@ function Teams() {
   // function colorPicker() {
   //   return Math.floor(Math.random() * colors.length);
   // }
-
-  // get values from state
-  const [{ user }, dispatch] = useStateValue();
-  console.log('user:', user)
-=======
-    }).catch(err => {
-      console.error('GET FAILED', err);
-    })
-  }, []);
-
-  const colors = [
-    ['#ff4b1f', '#ff9068'],
-    ['#16BFFD', '#CB3066'],
-    ['#1D4350', '#A43931'],
-    ['#a80077', '#66ff00'],
-    ['#ff4b1f', '#1fddff'],
-    ['#0D0D0D', '#434343'],
-    ['#4B79A1', '#283E51'],
-    ['#834d9b', '#d04ed6'],
-    ['#0099F7', '#F11712'],
-    ['#B24592', '#F15F79'],
-    ['#673AB7', '#512DA8'],
-    ['#005C97', '#363795']
-  ]
-
-  function colorPicker() {
-    return Math.floor(Math.random() * colors.length);
-  }
->>>>>>> origin
 
   const joinTeam = (teamID) => {
     console.log(teamID);
@@ -111,7 +75,6 @@ function Teams() {
   }
 
   return (
-<<<<<<< HEAD
     <div className="wrapper">
       {/* SIDE NAVBAR COMPONENT */}
       <nav id="sidebar" className="sidebar">
@@ -200,23 +163,42 @@ function Teams() {
 					<a href="/CreateTeam" className="btn btn-primary float-right mt-n1">Create a Team</a>
 					<h1 className="h3 mb-3">Teams</h1>
 
-					<div className="row">
-            {/* CARD COMPONENT (team) */}
+          {/* Chart Visualization Container */}
+          <Container>
+            <Row>
+              <Col xs="6">
+                <div style={{ width: 400, height: 300 }}>
+                  <CategoriesTagsSunBurst />
+                </div>
+              </Col>
+              <Col xs="6">
+                <PopularResourcesBarChart />
+              </Col>
+            </Row>
+          </Container>
 
+					<div className="row">
+
+            {/* CARD COMPONENT (team) */}
             {_teams.map(team =>
             <div key={team._id} className="col-12 col-md-6 col-lg-4">
 							<div className="card">
 								<img className="card-img-top" src="img/photos/unsplash-1.jpg" alt="Unsplash" />
 								<div className="card-header px-4 pt-4">
 									<h5 className="card-title mb-0">{team.name}</h5>
-									<div className="badge badge-secondary my-2">{team.categoriesList[0] ? team.categoriesList[0] : "General"}</div>
+                  <div className="meta">
+                  <div className="badge badge-secondary my-2">{team.categoriesList[0] ? team.categoriesList[0] : "General"}</div>
+                    <div><i className='bx bx-merge'></i>{team.resourcesCount}</div>
+                    <div><i className='bx bxs-user-account'></i> {team.usersCount}</div>
+                  </div>
 								</div>
 								<div className="card-body px-4 pt-2">
 									<p>{team.description}</p>
 								</div>
-                <div className="card-body px-4 pt-2">
+                <div className="card-body px-4 pt-2 actions">
                   <Link className="btn btn-info" to={"/teams/" + team._id}>View</Link>
-                  <Link className="btn btn-outline-success btn-join-team" to="/#">Join</Link>
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
+                  { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
                 </div>
 							</div>
 						</div>)}
@@ -225,50 +207,8 @@ function Teams() {
         </div>  
         </main>
       </div>  
-		</div>
-    // <div className="cardContainer">
-    //   {_teams.map(team =>
-    //     <div className="teamCard" key={team.name}>
-    //       <header>
-    //         <img src="https://images.unsplash.com/photo-1612392166886-ee8475b03af2?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80" />
-    //         <div className="mask" style={{ background: `linear-gradient(${colors[colorPicker()][0]}, ${colors[colorPicker()][1]})` }}></div>
-    //         <h1>{team.name}</h1>
-    //       </header>
-    //       <section>
-    //         <div className="meta">
-    //           <div>{team.category}</div>
-    //           <div><i className='bx bx-merge'></i> 342</div>
-    //           <div><i className='bx bxs-user-account'></i> 24</div>
-    //         </div>
-    //         <article>
-    //           <p>{team.description}</p>
-    //         </article>
-    //         <div className="actions">
-    //           <div>
-    //             <Link className="btn btn-default" to="/#">Join</Link>
-    //             {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
-    //             <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
-    //           </div>
-    //         </div>
-    //       </section>
-    //     </div>
-    //   )}
-    // </div>
-=======
-    <>
-      <Container>
-        <Row>
-          <Col xs="6">
-            <div style={{ width: 400, height: 300 }}>
-              <CategoriesTagsSunBurst />
-            </div>
-          </Col>
-          <Col xs="6">
-            <PopularResourcesBarChart />
-          </Col>
-        </Row>
-      </Container>
-      <div className="cardContainer">
+
+      {/* <div className="cardContainer">
         {_teams.map(team =>
           <div className="teamCard" key={team.name}>
             <header>
@@ -290,15 +230,14 @@ function Teams() {
                   { user.isLoggedIn && user.teamsList.indexOf(team._id) === -1 && <button type="button" onClick={() => joinTeam(team._id)}>Join</button>}
                   { user.isLoggedIn && user.teamsList.indexOf(team._id) !== -1 && <p>Joined</p> }
                   {/* <Link className="btn btn-primary" to={"/teams/" + team.name.toLowerCase().trim().replace(/\s/g, "-")} team={team}>View</Link> */}
-                  <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
+                  {/* <Link className="btn btn-primary" to={"/teams/" + team._id}>View</Link>
                 </div>
               </div>
             </section>
           </div>
         )}
-      </div>
-    </>
->>>>>>> origin
+      </div> */}
+		</div>
   );
 }
 
