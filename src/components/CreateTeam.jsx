@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // import axios from "axios";
 
 function createTeam() {
+  const history = useHistory();
+
   const [_payload, setPayload] = useState({
     name: '',
     image: '',
@@ -34,6 +37,7 @@ function createTeam() {
       .then((data) => {
         // eslint-disable-next-line no-console
         console.log(data);
+        history.push('/teams');
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

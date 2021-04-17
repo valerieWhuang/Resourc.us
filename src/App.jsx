@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className="app">
-      { user.isLoggedIn ? (
+      { user.isLoggedIn || localStorage.getItem('userIsLoggedIn') ? (
       <div>
         <Route path="/" exact component={Home}></Route>
         <Route path="/teams/:id" component={TeamDetailPage} />

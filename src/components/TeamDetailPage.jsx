@@ -46,6 +46,7 @@ function TeamDetailPage({ match }) {
         <header>
           <div className="mask"></div>
           <h1>{t.name}</h1>
+          <button>Share a resource</button>
         </header>
         <section>
         <div className="meta">

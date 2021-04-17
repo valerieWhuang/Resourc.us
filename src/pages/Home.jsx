@@ -28,22 +28,6 @@ function HomePage() {
 
   return (
     <div className="wrapper">
-      {/* { user.isLoggedIn ? (
-        // authorized layout component (topNavbar, sideNavBar, main, contentContainer, etc.)
-        <div>
-          <h1>User is Logged In</h1>
-          <button type="button" onClick={userLogout}>Logout</button>
-        </div>
-
-        ) : (
-          // unauthorized layout (landing page)
-          <div>
-            <h1>User is Not Logged In</h1>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Signup</Link></li>
-          </div>
-        )} */}
-
       {/* SIDE NAVBAR COMPONENT */}
       <nav id="sidebar" className="sidebar">
         <div className="sidebar-content js-simplebar">
@@ -128,12 +112,15 @@ function HomePage() {
 			<main className="content">
 				<div className="container-fluid p-0">
 
-					<a href="#" className="btn btn-primary float-right mt-n1">Create a Team</a>
-					<h1 className="h3 mb-3">Teams</h1>
+					{/* <a href="#" className="btn btn-primary float-right mt-n1">Create a Team</a>
+					<h1 className="h3 mb-3">Teams</h1> */}
+
+          <h1>Welcome Back, {user.firstName}</h1>
 
 					<div className="row">
+            <p>KEVIN'S PR GOES HERE </p>
             {/* CARD COMPONENT (team or resource) */}
-            <div className="col-12 col-md-6 col-lg-4">
+            {/* <div className="col-12 col-md-6 col-lg-4">
 							<div className="card">
 
 								<img className="card-img-top" src="img/photos/unsplash-1.jpg" alt="Unsplash" />
@@ -151,7 +138,8 @@ function HomePage() {
                 </div>
 	
 							</div>
-						</div>
+						</div> */}
+
           </div>
         </div>  
         </main>
