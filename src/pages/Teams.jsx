@@ -138,7 +138,7 @@ function Teams() {
               </a>
 
 							<a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                <i className='bx bx-user-circle' ></i> <span className="text-dark">{user.firstName} {user.lastName}</span>
+                <i className='bx bx-user-circle' ></i> <span className="text-dark">{user.user.firstName} {user.user.lastName}</span>
                 {/* <img src={avatar} className="avatar img-fluid rounded-circle mr-1" alt="Chris Wood" /> <span className="text-dark">Chris Wood</span> */}
               </a>
 							<div className="dropdown-menu dropdown-menu-right">
