@@ -18,6 +18,7 @@ import {
   NavBar,
  } from './components';
 import { useStateValue } from './StateProvider';
+import ResourceCardPage from './components/ResourceCardPage';
 
 function App() {
   const location = useLocation().pathname;

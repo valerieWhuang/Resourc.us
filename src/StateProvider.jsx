@@ -17,8 +17,10 @@ const useUserContext = () => {
     throw new Error('useUserContext must be used within UserContextProvider!');
   }
   const user = contextValues[0];
+  const dispatch = contextValues[1];
   return {
-    user
+    user,
+    dispatch,
   };
 };
 
