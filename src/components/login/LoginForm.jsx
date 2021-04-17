@@ -36,8 +36,8 @@ const LoginForm = () => {
             lastName: res.lastName,
             emailAddress: res.emailAddress,
             googleId: res.googleId,
-            teamList: res.teamList,
-            id: res.id,
+            teamsList: res.teamsList,
+            id: res._id,
           },
         });
       })
