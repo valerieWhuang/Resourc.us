@@ -26,15 +26,15 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
 
-  useLayoutEffect(() => {
-    if (location === '/teams') {
-      setButton(<Link to="/CreateTeam" className="btn btn-success">Create Team</Link>);
-    } else if (location === '/CreateTeam' || location === '/CreateResource' || location === '/login' || location === '/signup') {
-      setButton('');
-    } else {
-      setButton(<Link to="/CreateResource" className="btn btn-success">Create Resource</Link>);
-    }
-  }, [location]);
+  // useLayoutEffect(() => {
+  //   if (location === '/teams') {
+  //     setButton(<Link to="/CreateTeam" className="btn btn-success">Create Team</Link>);
+  //   } else if (location === '/CreateTeam' || location === '/CreateResource' || location === '/login' || location === '/signup') {
+  //     setButton('');
+  //   } else {
+  //     setButton(<Link to="/CreateResource" className="btn btn-success">Create Resource</Link>);
+  //   }
+  // }, [location]);
 
   const userLogout = () => {
     // TO DO: consolidate
@@ -54,9 +54,10 @@ function App() {
   return (
     <div className="outerContainer">
       {/* {user.isLoggedIn && <Navbars />} */}
-      <Navbars />
+      {/* <Navbars /> */}
       <div className="innerContainer">
-        <header className="mainHeader">
+        {/* use later in new login/logout buttons */}
+        {/* <header className="mainHeader">
           <ul>
             <li className="primary-action">{button}</li>
             { user.isLoggedIn ? (
@@ -70,7 +71,8 @@ function App() {
               </div>
             )}
           </ul>
-        </header>
+        </header> */}
+
         <Route path="/test-page" exact><TestPage /></Route>
         <Route path="/" exact><Home /></Route>
         <Route path="/teams/:id" component={TeamDetailPage} />

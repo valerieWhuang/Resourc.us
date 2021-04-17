@@ -5,43 +5,45 @@ import { Link } from "react-router-dom";
 function TestPage () {
   return (
     <div>
-      <h1>This is the test page.</h1>
-
       <div className="wrapper">
 		
-    <nav id="sidebar" className="sidebar">
-			<div className="sidebar-content js-simplebar">
-				<a className="sidebar-brand" href="/">
-          <span className="align-middle mr-3"><i class='bx bx-bolt-circle'></i> Resourcus</span>
-        </a>
+      {/* SIDE NAVBAR COMPONENT */}
+      <nav id="sidebar" className="sidebar">
+        <div className="sidebar-content js-simplebar">
+          <a className="sidebar-brand" href="/">
+            <span className="align-middle mr-3"><i className='bx bx-bolt-circle'></i> Resourcus</span>
+          </a>
 
-				<ul className="sidebar-nav">
-          <li className="sidebar-header">Home</li>
-          <li className="sidebar-header">Teams</li>
-          <li className="sidebar-header"><Link to='/'><i class='bx bx-home-heart' ></i> Home</Link></li>
-          <li className="sidebar-header"><Link to='/teams'><i class='bx bx-group' ></i> Teams</Link></li>
+          <ul className="sidebar-nav">
+            <li className="sidebar-header">Home</li>
+            <li className="sidebar-header">Teams</li>
+            <li className="sidebar-header"><Link to='/'><i className='bx bx-home-heart' ></i> Home</Link></li>
+            <li className="sidebar-header"><Link to='/teams'><i className='bx bx-group' ></i> Teams</Link></li>
 
-					<li className="sidebar-item">
-						<a href="/teams" className="sidebar-link ">
-              <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">View All Teams</span>
-            </a>
-					</li>
+            <li className="sidebar-item">
+              <a href="/teams" className="sidebar-link ">
+                <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">View All Teams</span>
+              </a>
+            </li>
 
-					<li className="sidebar-item active">
-						<a href="#pages" data-toggle="collapse" className="sidebar-link">
-              <i className="align-middle" data-feather="layout"></i> <span className="align-middle">My Teams</span>
-            </a>
-						<ul id="pages" className="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
-							<li className="sidebar-item"><a className="sidebar-link" href="pages-profile.html">Team 1</a></li>
-							<li className="sidebar-item"><a className="sidebar-link" href="pages-settings.html">Team 2</a></li>
-							<li className="sidebar-item"><a className="sidebar-link" href="pages-clients.html">Team 3</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
+            <li className="sidebar-item active">
+              <a href="#pages" data-toggle="collapse" className="sidebar-link">
+                <i className="align-middle" data-feather="layout"></i> <span className="align-middle">My Teams</span>
+              </a>
+              <ul id="pages" className="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+                <li className="sidebar-item"><a className="sidebar-link" href="pages-profile.html">Team 1</a></li>
+                <li className="sidebar-item"><a className="sidebar-link" href="pages-settings.html">Team 2</a></li>
+                <li className="sidebar-item"><a className="sidebar-link" href="pages-clients.html">Team 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
+    {/* MAIN LAYOUT COMPONENT */}
 		<div className="main">
+
+      {/* TOP NAVBAR COMPONENT */}
 			<nav className="navbar navbar-expand navbar-light navbar-bg">
 				<a className="sidebar-toggle">
           {/* <i className="hamburger align-self-center"></i> */}
@@ -50,7 +52,7 @@ function TestPage () {
 
 				<form className="d-none d-sm-inline-block">
 					<div className="input-group input-group-navbar">
-						<input type="text" className="form-control" placeholder="Search projects…" aria-label="Search" />
+						<input type="text" className="form-control" placeholder="Search…" aria-label="Search" />
 						<div className="input-group-append">
 							<button className="btn" type="button">
                 <i className='bx bx-search-alt-2'></i>
@@ -75,7 +77,7 @@ function TestPage () {
                   <i className='bx bx-user' ></i> Profile
                 </a>
                 <a className="dropdown-item" href="pages-settings.html">
-                  <i class='bx bx-cog' ></i> Settings
+                  <i className='bx bx-cog' ></i> Settings
                 </a>
 								<div className="dropdown-divider"></div>
 								<a className="dropdown-item" href="#">Sign out</a>
@@ -85,13 +87,15 @@ function TestPage () {
 				</div>
 			</nav>
 
+      {/* CONTENT CONTAINER COMPONENT */}
 			<main className="content">
 				<div className="container-fluid p-0">
 
-					<a href="#" className="btn btn-primary float-right mt-n1"><i className="fas fa-plus"></i> New project</a>
-					<h1 className="h3 mb-3">Projects</h1>
+					<a href="#" className="btn btn-primary float-right mt-n1"><i className="bx bx-user-plus"></i> Create a Team</a>
+					<h1 className="h3 mb-3">Teams</h1>
 
 					<div className="row">
+            {/* CARD COMPONENT (team or resource) */}
 						<div className="col-12 col-md-6 col-lg-3">
 							<div className="card">
 								<div className="card-header px-4 pt-4">
