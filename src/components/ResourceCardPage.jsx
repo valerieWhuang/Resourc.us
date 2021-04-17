@@ -7,7 +7,24 @@ const ResourceCardPage = () => {
    const { id } = useParams();
   console.log(id)
 
-  useEffect( () => {
+  const [resource, setResource] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/resource/${id}`, {
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setResource(data);
+      })
+      .catch((err) => {
+        console.log('Get Fail', err);
+      });
 
   }, [])
   return (
