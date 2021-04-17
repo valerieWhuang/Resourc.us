@@ -4,7 +4,7 @@ import { useStateValue, useUserContext } from '../StateProvider';
 
 function HomePage() {
   // State for our three teams
-  const [_teams, setTeams] = useState([]);
+  //  const [_teams, setTeams] = useState([]);
   // State for each teams' 3 resources.
   // [ [{1}, {2}, {3}], [{4}, {5}, {6}], [{7}, {8}, {9}] ]
   //const [_resources, setResources] = useState([[{}, {}, {}], [{}, {}, {}], [{}, {}, {}]]);
